@@ -1,0 +1,99 @@
+/*
+*	 Author: beshleyua
+*	 Author URL: http://themeforest.net/user/beshleyua
+*/
+
+/* TABLE OF CONTENTS
+	1. Theme Blue
+*/
+
+/* 1. Theme Blue */
+a:hover {
+	color: #ee534f;
+}
+
+.header .logo {
+	background: #ee534f;
+}
+
+.header .top-menu ul li.active a {
+	color: #ee534f;
+}
+
+.header .top-menu ul li.active a .icon {
+	color: #ee534f;
+}
+
+.header .social a:hover .icon {
+	color: #ee534f;
+}
+
+.card-inner .card-wrap .title span {
+	color: #ee534f;
+}
+
+.content.inner-top .text p strong {
+	color: #ee534f;
+}
+
+.content.inner-top .circle-bts a:hover .icon {
+	color: #ee534f;
+}
+
+.content.inner-top .circle-bts a:hover span {
+	color: #ee534f;
+}
+
+.service-items .service-item .icon {
+	color: #ee534f;
+}
+
+.pricing-items .pricing-item .icon {
+	color: #ee534f;
+}
+
+.pricing-items .pricing-item .feature-list ul li strong {
+	background: #ee534f;
+}
+
+.pricing-items .pricing-item .lnks .lnk span {
+	color: #ee534f;
+}
+
+.fuct-items .fuct-item .icon {
+	color: #ee534f;
+}
+
+.resume-items .resume-item.active .date {
+	color: #ee534f;
+}
+
+.skills-list ul li .progress .percentage {
+	background: #ee534f;
+}
+
+.content.works .filter-menu .f_btn.active {
+	color: #ee534f;
+}
+
+.box-item .image .info:before,
+.box-item .image .info:after {
+	background: #ee534f;
+}
+
+.contacts-items .contacts-item .icon {
+	color: #ee534f;
+}
+
+.post-box .blog-content blockquote {
+	border-left-color: #ee534f;
+}
+
+.post-box .blog-content ul.list-style li:before {
+	background: #ee534f;
+}
+
+.post-box .post-comments li .comment-info .name h6 {
+	color: #ee534f;
+}
+
