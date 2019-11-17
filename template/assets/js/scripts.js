@@ -11,7 +11,7 @@
 
 var preload = $('.preloader');
 var lines = $('.lines-grid');
-preload.find('.spinner').delay(2000).fadeOut(function() {
+preload.find('.spinner').delay(1000).fadeOut(function() {
     preload.fadeOut();
     lines.addClass('loaded');
 });
@@ -34,7 +34,7 @@ $(function() {
 
     $('.typed-title').typed({
         stringsElement: $('.typing-title'),
-        backDelay: 5000,
+        backDelay: 3000,
         /* Delay in text change */
         typeSpeed: 0,
         /* Typing speed */
