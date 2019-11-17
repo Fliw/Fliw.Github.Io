@@ -11,11 +11,11 @@
 
 var preload = $('.preloader');
 var lines = $('.lines-grid');
-preload.find('.spinner').delay(1000).fadeOut(function() {
+preload.find('.spinner').delay(100).fadeOut(function() {
     preload.fadeOut();
-    lines.addClass('loaded');
-});
 
+});
+lines.addClass('loaded');
 $(function() {
     'use strict';
 
