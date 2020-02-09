@@ -77,16 +77,142 @@
 		Favicons
 	-->
     <link rel="shortcut icon" href="images/favicons/favicon.ico">
+    <style>
+        #particles-js {
+            width: 100%;
+            height:inherit;
+            float:left;
+        }
+    </style>
 </head>
 
 <body>
+    <script src="template/assets/js/particles.js"></script>
+
+    <script type="text/javascript">
+        var partJson = {
+            "particles": {
+                "number": {
+                    "value": 57,
+                    "density": {
+                        "enable": true,
+                        "value_area": 710.2328774690454
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "polygon",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 160.3412060865523,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1.122388442605866
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 4.810236182596568,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        }
+        var jsonUri = "data:text/plain;base64," + window.btoa(JSON.stringify(partJson));
+        /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+        particlesJS.load('particles-js', jsonUri, function () {
+            console.log('callback - particles.js config loaded');
+        });
+    </script>
     <div class="page">
         <!--
 			Preloader
         -->
-         <div class="preloader"> 
+        <div class="preloader">
             <div class="loader"></div>
-            <h3 style="margin-top:350px;">Loading...</h3>
+            <h3 style="margin-top:350px;">Loading...<br> If Stuck, Refresh.</h3>
         </div>
 
         <script>
@@ -161,10 +287,13 @@
 			-->
             <div class="card-inner card-started active" id="home-card">
                 <!-- Started Background -->
-                <div class="slide" style="background-image: url(template/assets/img/bg-min.webp);">
+                <div class="slide" style="background-image: url(template/assets/img/bg-min.webp);"><div id="particles-js"></div>
                 </div>
                 <div class="centrize full-width">
                     <div class="vertical-center">
+                        
+                        <!-- scripts -->
+
                         <!-- Started titles -->
                         <div class="title"><span>Muhammad<br></span>Rafly Indrawan</div>
                         <div class="subtitle">
@@ -203,7 +332,18 @@
                                         <p>
                                             <strong>Hello, my name is Muhammad Rafly Indrawan</strong>, Web-developer
                                             And IT Enthusiast
-                                            based on Yogyakarta.
+                                            based on <strong>Yogyakarta.</strong><br>
+                                            <br>
+                                            Everyday i Work And Learned on my project, <strong>Code For People and
+                                                Future.</strong> <br>I Always Learn About Some <strong>New Technology
+                                                And Framework,</strong> Try To Improving Them on my Version Self. <br>
+                                            <br>i Have <strong>Principle</strong> That Every <strong>Error,</strong>
+                                            Every <strong>bug</strong> And Every <strong>Experience</strong> you Got In
+                                            Coding, Will Make You A <strong>Better Coder.</strong> <br>
+                                            I Love Project That make me Able to <strong>acquire A New Skill</strong>
+                                            That i Didn't Have<br>
+                                            I'm Also Love For <strong>Sharing Code, Sharing Experience to people,
+                                                Sharing Articles And Many Things </strong> <br>
                                             <br /> I have a lot experience in website building <br /> and customization.
                                             Also I Have Skill To Make A Website With <strong>HTML 5, CSS
                                                 3,Materialize,<br />
@@ -213,16 +353,16 @@
                                         </p>
                                     </div>
                                     <div class="circle-bts">
-                                        
+                                        <br>
                                         <a href="https://linkedin.com/Fliw" target="_blank"><i
                                                 class="icon la la-linkedin"></i></a>
                                         <a href="https://instagram.com/fliw__" target="_blank"><i
                                                 class="icon la la-instagram"></i></a>
                                         <a href="https://facebook.com/Fliw.id" target="_blank"><i
-                                                class="icon la la-facebook"></i></a><br>
-                                                <a href="http://Rafli.site/MuhRafly.pdf" target="_blank"><span><i
+                                                class="icon la la-facebook"></i></a><br><br>
+                                        <a href="http://Rafli.site/MuhRafly.pdf" target="_blank"><span><i
                                                     class="icon la la-download"></i>Download My CV</span></a>
-                                            <br>
+                                        <br><br>
                                         <a href="https://github.com/Fliw" target="_blank"><i
                                                 class="icon la la-github"></i></a>
                                         <a href="https://api.whatsapp.com/send?phone=628381094983" target="_blank"><i
@@ -234,13 +374,19 @@
                             </div>
                             <div class="row"> <br><br>
                                 <div class="col-md-12">
-                                    <p><strong>Programming Languages And Operating Systems </strong> i Use in 1 Year (Realtime) </p>
-                                    <figure><embed src="https://wakatime.com/share/@Fliw/98060522-f59c-4982-9201-d1dfdd6951d1.svg"></embed></figure>
+                                    <p><strong>Programming Languages And Operating Systems </strong> i Use in 1 Year
+                                        (Realtime) </p>
+                                    <figure><embed
+                                            src="https://wakatime.com/share/@Fliw/98060522-f59c-4982-9201-d1dfdd6951d1.svg"></embed>
+                                    </figure>
                                 </div>
                             </div>
                             <div class="row"> <br><br>
                                 <div class="col-md-12">
-                                    <figure><embed src="https://wakatime.com/share/@Fliw/19bd3704-adc1-4a45-a5ad-7eddcc9a7d23.svg"></embed></figure></div>
+                                    <figure><embed
+                                            src="https://wakatime.com/share/@Fliw/19bd3704-adc1-4a45-a5ad-7eddcc9a7d23.svg"></embed>
+                                    </figure>
+                                </div>
                             </div>
 
                         </div>
@@ -256,21 +402,32 @@
                                 <!-- service item -->
                                 <div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
                                     <div class="service-item card-box">
-                                        <div class="icon"><i class="la la-code"></i></div>
-                                        <div class="name">Introduce Rubix ML, A Machine Learning Library For PHP Language</div>
+                                        <div class="icon"><i class="la la-medium"></i></div>
+                                        <div class="name">Introduce Rubix ML, A Machine Learning Library For PHP
+                                            Language</div>
                                         <p>
-                                          An Article About Rubix ML, Introduction, Why Choose, Project Spotlight And Conclusion. Rubix ML Is A Machine Learning For PHP Language.<br><h4>
-                                            <a href="https://medium.com/@muhammadraflyindrawan/introduce-rubix-ml-a-machine-learning-library-for-php-language-937320919cf8">Click Here to Read More.</a></h4>
+                                            An Article About Rubix ML, Introduction, Why Choose, Project Spotlight And
+                                            Conclusion. Rubix ML Is A Machine Learning For PHP Language.<br><br>
+                                            <h4>
+                                                <a
+                                                    href="https://medium.com/@muhammadraflyindrawan/introduce-rubix-ml-a-machine-learning-library-for-php-language-937320919cf8">Click
+                                                    Here to Read More.</a></h4>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
                                     <div class="service-item card-box">
-                                        <div class="icon"><i class="la la-code"></i></div>
-                                        <div class="name">Introduce Laravel Vapor, A Serverless Deployment Platform For Laravel</div>
+                                        <div class="icon"><i class="la la-medium"></i></div>
+                                        <div class="name">Introduce Laravel Vapor, A Serverless Deployment Platform For
+                                            Laravel</div>
                                         <p>
-                                          An Article About Laravel Vapor, Introduction, What Make Different, Comparison And Conclusion. Laravel Vapor Is A Serverless Deployment Platform For Laravel 6.<br><h4>
-                                            <a href="https://medium.com/@muhammadraflyindrawan/introduce-laravel-vapor-a-serverless-deployment-platform-for-laravel-aae273ce92cb">Click Here to Read More.</a></h4>
+                                            An Article About Laravel Vapor, Introduction, What Make Different,
+                                            Comparison And Conclusion. Laravel Vapor Is A Serverless Deployment Platform
+                                            For Laravel 6.<br><br>
+                                            <h4>
+                                                <a
+                                                    href="https://medium.com/@muhammadraflyindrawan/introduce-laravel-vapor-a-serverless-deployment-platform-for-laravel-aae273ce92cb">Click
+                                                    Here to Read More.</a></h4>
                                         </p>
                                     </div>
                                 </div>
@@ -1153,7 +1310,10 @@
                     <div class="card-wrap col col-m-12 col-t-12 col-d-8 col-d-lg-6" data-simplebar>
                         <!-- Map -->
                         <div class="card-image col col-m-12 col-t-12 col-d-4 col-d-lg-6">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.7808293373564!2d106.91735371421146!3d-6.916786369618094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68491045ea1e33%3A0xe2cb3ab140bbdc08!2sDigital%20Kode!5e0!3m2!1sen!2sid!4v1581174864304!5m2!1sen!2sid" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="TRUE"></iframe>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.7808293373564!2d106.91735371421146!3d-6.916786369618094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68491045ea1e33%3A0xe2cb3ab140bbdc08!2sDigital%20Kode!5e0!3m2!1sen!2sid!4v1581174864304!5m2!1sen!2sid"
+                                width="100%" height="100%" frameborder="0" style="border:0;"
+                                allowfullscreen="TRUE"></iframe>
                         </div>
                         <!--
 							Inner Top
