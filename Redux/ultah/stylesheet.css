@@ -1268,7 +1268,7 @@ audio {
 	margin-top: 50px;
 }
 .message {
-	margin-top: 200px;
+	margin-bottom: 200px;
 	display: none;
 }
 .message p {
@@ -1276,7 +1276,7 @@ audio {
 	font-size: 30px;
 	text-transform: uppercase;
 	color: #C4515C;
-	text-shadow: 2px 2px 2px #FFF;
+	text-shadow: 2px 2px 5px #FFF;
 	display: none;
 	font-weight: bold;
 }
