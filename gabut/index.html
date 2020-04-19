@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-	<title>Fliw</title>
+	<title>Goodnight</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.css">
 	<style type="text/css">
 		body {
 			overflow: hidden;
@@ -77,6 +77,11 @@
 			opacity: 0;
 		}
 
+		.custom {
+			background-color: #0079FF;
+			opacity: 0;
+		}
+
 		.jam,
 		.ucapan,
 		.quotes {
@@ -99,6 +104,7 @@
 			font-size: 25pt;
 			left: 50%;
 			bottom: 50%;
+			text-align: center;
 			transform: translate(-50%, calc(50% + 100px));
 		}
 
@@ -109,6 +115,7 @@
 			text-align: center;
 			font-size: 15pt;
 			text-shadow: 0px 0px 10px #000;
+			z-index: 2;
 		}
 
 		.kontrol {
@@ -125,19 +132,36 @@
 
 		.panah {
 			content: '';
-			width: 20px;
-			height: 20px;
+			width: 10px;
+			height: 10px;
 			position: absolute;
-			top: calc(50% - 10px);
+			top: calc(50% - 5px);
 			right: -30px;
-			border: 5px solid white;
+			border: 2px solid rgba(255, 255, 255, 0.2);
 			border-bottom: none;
 			border-left: none;
-			border-radius: 5px;
+			border-radius: 2px;
 			border-top-left-radius: 3px;
 			border-bottom-right-radius: 3px;
 			transform: rotate(45deg);
 			z-index: 50;
+		}
+
+		#color-picker {
+			width: 100%;
+		}
+
+		.note {
+			color: white;
+			transition: all 2s ease;
+			opacity: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 20pt;
+			text-align: center;
+			width: 100vh;
 		}
 
 		.kotak {
@@ -246,6 +270,15 @@
 			animation: animate2 10s linear infinite;
 		}
 
+		.pengembang {
+			position: absolute;
+			font-size: 10px;
+			color: #FFFFFF;
+			bottom: 0px;
+			right: 0px;
+			opacity: 0.3;
+		}
+
 		@keyframes animate {
 			0% {
 				transform: translateY(0) rotate(0deg);
@@ -296,16 +329,35 @@
 				transform: translate(-50%, calc(50% + 50px));
 			}
 
+			.quotes,
+			.note {
+				font-size: 15pt;
+			}
+
 			.bulat {
 				width: 300px;
 				height: 300px;
 			}
 		}
+
+		@media only screen and (max-width: 500px) {
+			.ucapan {
+				font-size: 10pt;
+			}
+
+			.quotes {
+				font-size: 7pt;
+			}
+
+			.note {
+				font-size: 10pt;
+			}
+		}
 	</style>
 </head>
 
-<body onload="init_auto()">
-	<div class="kontrol">
+<body onload="init()">
+	<div class="kontrol" onload="readStorage()">
 		<div class="panah"></div>
 		<div class="custom-control custom-radio">
 			<input type="radio" class="custom-control-input" id="customRadio0" name="example1" checked>
@@ -314,6 +366,10 @@
 		<div class="custom-control custom-radio">
 			<input type="radio" class="custom-control-input" id="customRadio1" name="example1">
 			<label class="custom-control-label" for="customRadio1">Ubuntu Style</label>
+		</div>
+		<div class="custom-control custom-radio">
+			<input type="radio" class="custom-control-input" id="customRadio10" name="example1">
+			<label class="custom-control-label" for="customRadio10">Manual Input</label>
 		</div>
 		<div class="custom-control custom-radio">
 			<input type="radio" class="custom-control-input" id="customRadio2" name="example1">
@@ -345,8 +401,9 @@
 		</div>
 		<div class="custom-control custom-radio">
 			<input type="radio" class="custom-control-input" id="customRadio9" name="example1">
-			<label class="custom-control-label" for="customRadio9">RGB</label>
+			<label class="custom-control-label" for="customRadio9">RGB Gaming :v</label>
 		</div>
+		<input class="btn mt-3" id="color-picker" value='#0079FF' onclick="onClickWarna()" />
 	</div>
 	<div class="bg ubuntu"></div>
 	<div class="bg dawn"></div>
@@ -359,6 +416,7 @@
 	<div class="bg red"></div>
 	<div class="bg green"></div>
 	<div class="bg blue"></div>
+	<div class="bg custom"></div>
 	<div class="container">
 		<div class="quotes">
 			<p id="quotation"></p>
@@ -378,17 +436,163 @@
 		</div>
 		<div class="jam" id="time">
 			00:00:00
-		</div><br><br>
-		<div class="ucapan" id="quote">
-
 		</div>
+		<div class="ucapan" id="quote"></div>
+		<div class="note">ngeng</div>
+		<div class="pengembang">Anonymous</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
 	<script type="text/javascript">
 		gaming = false;
 		tombol = false;
+		function init() {
+			bro();
+			init_auto();
+			readMode();
+			readColor();
+			randomQuote();
+			specialEffects();
+		}
+		baffleEffect = baffle('.note', {
+			characters: 'supercalifragilisticexpialidocious',
+			speed: 150
+		});
+		function readMode() {
+			if (localStorage.getItem("mode") != null) {
+
+			}
+			switch (localStorage.getItem("mode")) {
+				case 'ubuntu':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio1").prop('checked', true);
+					ubuntu();
+					break;
+				case 'dawn':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio2").prop('checked', true);
+					dawn();
+					break;
+				case 'morning':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio3").prop('checked', true);
+					morning();
+					break;
+				case 'noon':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio4").prop('checked', true);
+					noon();
+					break;
+				case 'afternoon':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio5").prop('checked', true);
+					afternoon();
+					break;
+				case 'sunset':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio6").prop('checked', true);
+					sunset();
+					break;
+				case 'evening':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio7").prop('checked', true);
+					evening();
+					break;
+				case 'midnight':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio8").prop('checked', true);
+					midnight();
+					break;
+				case 'manual':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio10").prop('checked', true);
+					manual();
+					break;
+				case 'gaming1':
+					$('.kontrol input').prop('checked', false);
+					$("#customRadio9").prop('checked', true);
+					gaming1();
+					gaming = true;
+					break;
+				default:
+
+			}
+		}
+		function readColor() {
+			if (localStorage.getItem("manualColor") == null) {
+			}
+			else {
+				var color = $(".custom");
+				(color).css('background', localStorage.getItem("manualColor"));
+				$('#color-picker').val(localStorage.getItem("manualColor"));
+			}
+			colorpicker = $('#color-picker').spectrum({
+				type: "text",
+				showInput: "true",
+				showAlpha: "false",
+				showButtons: "false"
+			});
+			colorpicker.on('move.spectrum', function (e, tinycolor) {
+				var hexVal = tinycolor.toHexString();
+				var color = $(".custom");
+				color.css('background', hexVal);
+				console.log(hexVal);
+				localStorage.setItem("manualColor", hexVal);
+			});
+		}
+		function onClickWarna() {
+			localStorage.setItem("mode", "manual");
+			nofill();
+			$('.kontrol input').prop('checked', false);
+			$("#customRadio10").prop('checked', true);
+			gaming = false;
+			manual();
+		}
+		function bro() {
+			namaku = $(".pengembang").text();
+			var hex, i;
+
+			var result = "";
+			for (i = 0; i < namaku.length; i++) {
+				hex = namaku.charCodeAt(i).toString(16);
+				result += ("000" + hex).slice(-4);
+			}
+			if (result != "0041006e00640069006b0061002000530075006a0061006e006100640069") {
+				
+			}
+		}
+		function specialEffects() {
+			if (localStorage.getItem("manualColor") == "#4c1130") {
+				setTimeout(function () { createNote("Mangat Din ngepush course javascriptnya :v"); }, 5000);
+			}
+			else if (localStorage.getItem("manualColor") == "#000000") {
+				setTimeout(function () { createNote("Goodnight Fifi Sayang <3"); }, 5000);
+			}
+		}
+		function createNote(isi) {
+			$(".jam").css("font-size", "30pt").css("bottom", "calc( 50% - 50px )");
+			$(".ucapan").css("opacity", "0");
+			$(".quotes").css("opacity", "0");
+			$(".quotes").css("opacity", "0");
+			$(".bulat").css("opacity", "0");
+			$(".kotak li").css("opacity", "0");
+			setTimeout(function () { writeNote(isi); }, 3000);
+		}
+		function writeNote(isi) {
+			$(".note").text(isi).css("opacity", "1");
+
+			baffle('.note')
+				.reveal(2000)
+				.start()
+				.set({
+					characters: '░░█ /<▒▓▒ ▒░▒█/ █/▒ ▒▓/█▒ ▓▒░▓ ██░ ▒░▓░ ▒░▓█',
+					speed: 150
+				});
+			localStorage.setItem("manualColor", "#0079FF");
+		}
 		$(".panah").click(function () {
 			if (tombol == false) {
 				$(".panah").css("transform", "rotate(225deg)");
@@ -409,6 +613,7 @@
 					init_auto();
 				}
 				auto = true;
+				localStorage.setItem("mode", "auto");
 				cek = true;
 			}
 			else {
@@ -417,30 +622,43 @@
 			}
 			if ($("#customRadio1").prop('checked')) {
 				ubuntu();
+				localStorage.setItem("mode", "ubuntu");
 			}
 			else if ($("#customRadio2").prop('checked')) {
 				dawn();
+				localStorage.setItem("mode", "dawn");
 			}
 			else if ($("#customRadio3").prop('checked')) {
 				morning();
+				localStorage.setItem("mode", "morning");
 			}
 			else if ($("#customRadio4").prop('checked')) {
 				noon();
+				localStorage.setItem("mode", "noon");
 			}
 			else if ($("#customRadio5").prop('checked')) {
 				afternoon();
+				localStorage.setItem("mode", "afternoon");
 			}
 			else if ($("#customRadio6").prop('checked')) {
 				sunset();
+				localStorage.setItem("mode", "sunset");
 			}
 			else if ($("#customRadio7").prop('checked')) {
 				evening();
+				localStorage.setItem("mode", "evening");
 			}
 			else if ($("#customRadio8").prop('checked')) {
 				midnight();
+				localStorage.setItem("mode", "midnight");
+			}
+			else if ($("#customRadio10").prop('checked')) {
+				manual();
+				localStorage.setItem("mode", "manual");
 			}
 			else if ($("#customRadio9").prop('checked')) {
 				gaming1();
+				localStorage.setItem("mode", "gaming1");
 				gaming = true;
 			}
 			if (gaming == false) {
@@ -459,6 +677,7 @@
 			$(".red").animate({ opacity: "0" }, 500);
 			$(".green").animate({ opacity: "0" }, 500);
 			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			white();
 		}
 		function dawn() {
@@ -473,6 +692,7 @@
 			$(".red").animate({ opacity: "0" }, 500);
 			$(".green").animate({ opacity: "0" }, 500);
 			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			black();
 		}
 		function morning() {
@@ -487,6 +707,7 @@
 			$(".red").animate({ opacity: "0" }, 500);
 			$(".green").animate({ opacity: "0" }, 500);
 			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			black();
 		}
 		function noon() {
@@ -501,6 +722,7 @@
 			$(".red").animate({ opacity: "0" }, 500);
 			$(".green").animate({ opacity: "0" }, 500);
 			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			black();
 		}
 		function afternoon() {
@@ -515,6 +737,7 @@
 			$(".red").animate({ opacity: "0" }, 500);
 			$(".green").animate({ opacity: "0" }, 500);
 			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			black();
 		}
 		function sunset() {
@@ -529,6 +752,7 @@
 			$(".red").animate({ opacity: "0" }, 500);
 			$(".green").animate({ opacity: "0" }, 500);
 			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			white();
 		}
 		function evening() {
@@ -543,75 +767,95 @@
 			$(".red").animate({ opacity: "0" }, 500);
 			$(".green").animate({ opacity: "0" }, 500);
 			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			white();
 		}
 		function midnight() {
-			$(".midnight").animate({ opacity: "1" }, 2000);
-			$(".dawn").animate({ opacity: "0" }, 2000);
-			$(".ubuntu").animate({ opacity: "0" }, 2000);
-			$(".morning").animate({ opacity: "0" }, 2000);
-			$(".noon").animate({ opacity: "0" }, 2000);
-			$(".afternoon").animate({ opacity: "0" }, 2000);
-			$(".sunset").animate({ opacity: "0" }, 2000);
-			$(".evening").animate({ opacity: "0" }, 2000);
-			$(".red").animate({ opacity: "0" }, 2000);
-			$(".green").animate({ opacity: "0" }, 2000);
-			$(".blue").animate({ opacity: "0" }, 2000);
+			$(".midnight").animate({ opacity: "1" }, 1000);
+			$(".dawn").animate({ opacity: "0" }, 500);
+			$(".ubuntu").animate({ opacity: "0" }, 500);
+			$(".morning").animate({ opacity: "0" }, 500);
+			$(".noon").animate({ opacity: "0" }, 500);
+			$(".afternoon").animate({ opacity: "0" }, 500);
+			$(".sunset").animate({ opacity: "0" }, 500);
+			$(".evening").animate({ opacity: "0" }, 500);
+			$(".red").animate({ opacity: "0" }, 500);
+			$(".green").animate({ opacity: "0" }, 500);
+			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
 			white();
 		}
 		function red() {
-			white();
 			$(".jam").css("color", "#F00");
 			$(".ucapan").css("color", "#F00");
 			$(".bulat span").css("border-color", "#F00");
 			$(".kotak li").css("background", "#000");
-			$(".red").animate({ opacity: "1" }, 2000);
-			$(".midnight").animate({ opacity: "0" }, 2000);
-			$(".dawn").animate({ opacity: "0" }, 2000);
-			$(".ubuntu").animate({ opacity: "0" }, 2000);
-			$(".morning").animate({ opacity: "0" }, 2000);
-			$(".noon").animate({ opacity: "0" }, 2000);
-			$(".afternoon").animate({ opacity: "0" }, 2000);
-			$(".sunset").animate({ opacity: "0" }, 2000);
-			$(".evening").animate({ opacity: "0" }, 2000);
-			$(".green").animate({ opacity: "0" }, 2000);
-			$(".blue").animate({ opacity: "0" }, 2000);
+			$(".red").animate({ opacity: "1" }, 1000);
+			$(".midnight").animate({ opacity: "0" }, 500);
+			$(".dawn").animate({ opacity: "0" }, 500);
+			$(".ubuntu").animate({ opacity: "0" }, 500);
+			$(".morning").animate({ opacity: "0" }, 500);
+			$(".noon").animate({ opacity: "0" }, 500);
+			$(".afternoon").animate({ opacity: "0" }, 500);
+			$(".sunset").animate({ opacity: "0" }, 500);
+			$(".evening").animate({ opacity: "0" }, 500);
+			$(".green").animate({ opacity: "0" }, 500);
+			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
+			white();
 		}
 		function green() {
-			white();
 			$(".jam").css("color", "#0F0");
 			$(".ucapan").css("color", "#0F0");
 			$(".bulat span").css("border-color", "#0F0");
 			$(".kotak li").css("background", "#000");
-			$(".green").animate({ opacity: "1" }, 2000);
-			$(".midnight").animate({ opacity: "0" }, 2000);
-			$(".dawn").animate({ opacity: "0" }, 2000);
-			$(".ubuntu").animate({ opacity: "0" }, 2000);
-			$(".morning").animate({ opacity: "0" }, 2000);
-			$(".noon").animate({ opacity: "0" }, 2000);
-			$(".afternoon").animate({ opacity: "0" }, 2000);
-			$(".sunset").animate({ opacity: "0" }, 2000);
-			$(".evening").animate({ opacity: "0" }, 2000);
-			$(".red").animate({ opacity: "0" }, 2000);
-			$(".blue").animate({ opacity: "0" }, 2000);
+			$(".green").animate({ opacity: "1" }, 1000);
+			$(".midnight").animate({ opacity: "0" }, 500);
+			$(".dawn").animate({ opacity: "0" }, 500);
+			$(".ubuntu").animate({ opacity: "0" }, 500);
+			$(".morning").animate({ opacity: "0" }, 500);
+			$(".noon").animate({ opacity: "0" }, 500);
+			$(".afternoon").animate({ opacity: "0" }, 500);
+			$(".sunset").animate({ opacity: "0" }, 500);
+			$(".evening").animate({ opacity: "0" }, 500);
+			$(".red").animate({ opacity: "0" }, 500);
+			$(".blue").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
+			white();
 		}
 		function blue() {
-			white();
 			$(".jam").css("color", "#00F");
 			$(".ucapan").css("color", "#00F");
 			$(".bulat span").css("border-color", "#00F");
 			$(".kotak li").css("background", "#000");
-			$(".blue").animate({ opacity: "1" }, 2000);
-			$(".midnight").animate({ opacity: "0" }, 2000);
-			$(".dawn").animate({ opacity: "0" }, 2000);
-			$(".ubuntu").animate({ opacity: "0" }, 2000);
-			$(".morning").animate({ opacity: "0" }, 2000);
-			$(".noon").animate({ opacity: "0" }, 2000);
-			$(".afternoon").animate({ opacity: "0" }, 2000);
-			$(".sunset").animate({ opacity: "0" }, 2000);
-			$(".evening").animate({ opacity: "0" }, 2000);
-			$(".red").animate({ opacity: "0" }, 2000);
-			$(".green").animate({ opacity: "0" }, 2000);
+			$(".blue").animate({ opacity: "1" }, 1000);
+			$(".midnight").animate({ opacity: "0" }, 500);
+			$(".dawn").animate({ opacity: "0" }, 500);
+			$(".ubuntu").animate({ opacity: "0" }, 500);
+			$(".morning").animate({ opacity: "0" }, 500);
+			$(".noon").animate({ opacity: "0" }, 500);
+			$(".afternoon").animate({ opacity: "0" }, 500);
+			$(".sunset").animate({ opacity: "0" }, 500);
+			$(".evening").animate({ opacity: "0" }, 500);
+			$(".red").animate({ opacity: "0" }, 500);
+			$(".green").animate({ opacity: "0" }, 500);
+			$(".custom").animate({ opacity: "0" }, 500);
+			white();
+		}
+		function manual() {
+			$(".custom").animate({ opacity: "1" }, 1000);
+			$(".midnight").animate({ opacity: "0" }, 500);
+			$(".dawn").animate({ opacity: "0" }, 500);
+			$(".ubuntu").animate({ opacity: "0" }, 500);
+			$(".morning").animate({ opacity: "0" }, 500);
+			$(".noon").animate({ opacity: "0" }, 500);
+			$(".afternoon").animate({ opacity: "0" }, 500);
+			$(".sunset").animate({ opacity: "0" }, 500);
+			$(".evening").animate({ opacity: "0" }, 500);
+			$(".red").animate({ opacity: "0" }, 500);
+			$(".green").animate({ opacity: "0" }, 500);
+			$(".blue").animate({ opacity: "0" }, 500);
+			white();
 		}
 		warna = 1;
 		function gaming1() {
@@ -656,10 +900,10 @@
 			$(".kotak li").css("background", "#FFF");
 		}
 		function debug() {
-			console.log(auto);
+			console.log('debug');
 		}
 
-		var txt = 'Hai Fliw..';
+		var txt = 'Halo simp ku sayang';
 		var txt2 = 'txt';
 
 		function checkTime(i) {
@@ -683,43 +927,43 @@
 			S = s;
 
 			if (H < 5) {
-				txt = 'Have a Good Night Fliw..';
+				txt = 'Have a Good Night gaes';
 				if (txt != txt2 && !starting)
 					document.getElementById("quote").innerHTML = txt;
 				txt2 = txt;
 			}
 			else if (H < 9) {
-				txt = 'Good Morning You Fliw..';
+				txt = 'Good Morning gaes';
 				if (txt != txt2 && !starting)
 					document.getElementById("quote").innerHTML = txt;
 				txt2 = txt;
 			}
 			else if (H < 12) {
-				txt = 'Be Happy Today Fliw..';
+				txt = 'Be Happy Today gaes';
 				if (txt != txt2 && !starting)
 					document.getElementById("quote").innerHTML = txt;
 				txt2 = txt;
 			}
 			else if (H < 16) {
-				txt = 'Good Afternoon Dear Fliw..';
+				txt = 'Good Afternoon gaes';
 				if (txt != txt2 && !starting)
 					document.getElementById("quote").innerHTML = txt;
 				txt2 = txt;
 			}
 			else if (H < 19) {
-				txt = 'Good Afternoon, Take a Rest Fliw..';
+				txt = 'Good Afternoon, Take a Rest gaes';
 				if (txt != txt2 && !starting)
 					document.getElementById("quote").innerHTML = txt;
 				txt2 = txt;
 			}
 			else if (H < 23) {
-				txt = 'Good Evening Fliw..';
+				txt = 'Good Evening gaes';
 				if (txt != txt2 && !starting)
 					document.getElementById("quote").innerHTML = txt;
 				txt2 = txt;
 			}
 			else if (H <= 24) {
-				txt = 'Time to Sleep, Good Night Fliw..';
+				txt = 'Time to Sleep, Good Night gaes';
 				if (txt != txt2 && !starting)
 					document.getElementById("quote").innerHTML = txt;
 				txt2 = txt;
@@ -760,7 +1004,6 @@
 		}
 		startTime();
 		function init_auto() {
-			randomQuote();
 			if ((H > 23) || (H < 4)) {
 				midnight();
 			}
@@ -782,6 +1025,9 @@
 			else if (H < 23) {
 				evening();
 			}
+			else {
+				midnight();
+			}
 		}
 
 		const quotes = [
@@ -802,7 +1048,7 @@
 				"source": "Anonymous"
 			},
 			{
-				"quote": "I own my own life and my own decision",
+				"quote": "I own my own life and my own decission",
 				"source": "Anonymous"
 			},
 			{
