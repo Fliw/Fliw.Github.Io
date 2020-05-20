@@ -970,7 +970,7 @@ textarea.error::-webkit-input-placeholder {
     bottom: 5px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: dodgerblue;
+    border-top-color: #C0392B;
     -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
 }
@@ -984,7 +984,7 @@ textarea.error::-webkit-input-placeholder {
     bottom: 15px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: darkslateblue;
+    border-top-color: maroon;
     -webkit-animation: spin 1.5s linear infinite;
     animation: spin 1.5s linear infinite;
 }
