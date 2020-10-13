@@ -32,7 +32,7 @@
 ------------------*/
 
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
 
 
 
@@ -221,7 +221,7 @@ b, strong {
     box-shadow: none;
     text-transform: capitalize;
     outline: none !important;
-    background-color: #007ced;
+    background-color: #8444df;
     border-radius: 0px;
     min-width: 140px;
     position: relative;
@@ -467,7 +467,7 @@ b, strong {
     bottom: 0;
     height: 100%;
     width: 100%;
-    background-color: #007ced;
+    background-color: #8444df;
 }
 
 .preloader-screens > div:nth-child(2) {
@@ -701,7 +701,7 @@ b, strong {
     transition: all 0.3s ease-in-out 0s;
     padding: 0 0px;
     /* max-width: 300px; */
-    background: #007ced;
+    background: #8444df;
     border-radius: 25px;
     padding: 15px;
 }
@@ -843,7 +843,7 @@ span#autoplay > span {
     position: absolute;
     height: 350px;
     width: 350px;
-    background: #007ced;
+    background: #8444df;
     top: 0;
     left: 0;
     right: 0;
@@ -1245,7 +1245,7 @@ img.shape8 {
 .filter li.active {
     background: #fff;
     color: #fff;
-    background: #007ced;
+    background: #8444df;
 }
 
 .filter li {
@@ -1454,7 +1454,7 @@ img.shape8 {
     text-align: center;
     border-radius: 10px;
     line-height: 67px;
-    background: #007ced !important;
+    background: #8444df !important;
     color: #fff !important;
 }
 
@@ -1613,7 +1613,7 @@ img.shape8 {
 
 .section-testimony--content {
     position: relative;
-    background: #007ced url(../images/pattern1.png);
+    background: #8444df url(../images/pattern1.png);
     background-position: top right;
     background-size: 170px;
     background-repeat: no-repeat;
@@ -1640,7 +1640,7 @@ img.shape8 {
 }
 
 .section-testimony .section-inner {
-    background-color: #007ced !important;
+    background-color: #8444df !important;
 }
 
 .single-testimonials-head p {
@@ -1802,8 +1802,8 @@ img.shape8 {
 }
 
 .page-item.active .page-link {
-    background-color: #007ced;
-    border-color: #007ced;
+    background-color: #8444df;
+    border-color: #8444df;
 }
 
 .blog-list {
@@ -2011,7 +2011,7 @@ span.blog-by {
         left: -300px;
         width: 100%;
         overflow: auto;
-        background: #007ced;
+        background: #8444df;
         height: calc(100vh - 40px);
     }
 
