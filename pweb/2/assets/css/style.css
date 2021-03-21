@@ -19,7 +19,7 @@ header {
 }
 body {
   background-size: cover;
-  background-image: url("img/WhatsApp\ Image\ 2021-03-19\ at\ 19.23.46.jpeg");
+  background-image: url("../img/bg.jpeg");
 }
 .blur {
   background: rgba(255, 255, 255, 0.1);
