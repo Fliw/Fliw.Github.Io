@@ -805,15 +805,15 @@
       age = $('#inputAge').val();
       gender = $('#inputGender').val();
       address = $('#inputAddress').val();
-      // if(!name || !email || !age || !gender ){
-      //   alert("mohon isi data dengan benar!");
-      //   console.log(name,email,age,gender,address);
-      // }
-      // else{
+      if(!name || !email || !age || !gender ){
+        alert("mohon isi data dengan benar!");
+        console.log(name,email,age,gender,address);
+      }
+      else{
       $('#modal1').modal('hide');
       $('#modal2').modal('show');
       console.log(name, email, age, gender, address);
-      // }
+      }
     });
     $("#buttonBack1").click(function () {
       $('#modal2').modal('hide');
