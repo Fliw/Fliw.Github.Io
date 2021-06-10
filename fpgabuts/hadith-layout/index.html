@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FP WEB</title>
+    <style>
+        html {
+            background-image: url('../img/mosque.webp');
+            background-size: cover;
+        }
+        
+        .main {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        
+        .card:hover {
+            background-color: #47597E;
+            color: white;
+        }
+        
+        .addReadMore.showlesscontent .SecSec,
+        .addReadMore.showlesscontent .readLess {
+            display: none;
+        }
+        
+        .addReadMore.showmorecontent .readMore {
+            display: none;
+        }
+        
+        .addReadMore .readMore,
+        .addReadMore .readLess {
+            font-weight: bold;
+            margin-left: 2px;
+            color: blue;
+            cursor: pointer;
+        }
+        
+        .addReadMoreWrapTxt.showmorecontent .SecSec,
+        .addReadMoreWrapTxt.showmorecontent .readLess {
+            display: block;
+        }
+        
+        .glass {
+            background: rgba( 255, 255, 255, 0.35);
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+            backdrop-filter: blur( 1.5px);
+            -webkit-backdrop-filter: blur( 1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18);
+        }
+    </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="main">
+    <nav class="navbar navbar-dark sticky-top" style="background-color: white; border-radius: 0px 0px 10px 10px;">
+        <a class="navbar-brand text-dark" href="../index.html">
+            <img src="https://3.bp.blogspot.com/-SDFe1Qua04w/XHbqWZyRDvI/AAAAAAAAIDk/9rGSpXejx-8212FJ0mnARObGEWjIJAl2gCK4BGAYYCw/s1600/icon%2Ballah%2Bakbar%2Bislam.png" width="35" height="35" class="d-inline-block align-top" alt=""> Aplikasi Islami
+        </a>
+        <button class="btn btn-warning my-2 my-sm-0" type="submit">Logout</button>
+    </nav>
+    <h1 id="loadingText" class="text-center text-white" style="position: absolute; margin-top: 10px;">Sedang Memuat Hadits.. Mohon Tunggu...</h1>
+    <div class="container glass" id="mainFrameHadith" style="margin-top: 5%; display: none;">
+        <div class="jumbotron" style="background-color: rgba(0, 0, 0, 0);">
+
+            <h1 class="display-4" id="hadithTitle"></h1>
+            <p class="lead">Berikut Data Hadist nya.. Jangan Lupa Baca Bismillah Ngab</p>
+            <button class="btn bg-primary text-white btnPrev">Hadist Sebelumnya</button>
+            <button class="btn btnNext bg-primary text-white">Hadist Selanjutnya</button>
+            <hr class="my-4">
+            <div class="list-group" id="mainContent">
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark fixed-bottom" style="background-color: white;">
+        <button class="btn bg-primary text-white btnPrev">Back</button>
+        <button class="btn btnNext bg-primary text-white">Next</button>
+    </nav>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous ">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous ">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="hadith.js"></script>
+</body>
+
+</html>
