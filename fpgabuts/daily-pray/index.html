@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FP WEB</title>
+    <style>
+        html {
+            background-image: url('../img/bg.jpg');
+        }
+
+        .main {
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .card:hover {
+            background-color: #47597E;
+            color: white;
+        }
+
+        .addReadMore.showlesscontent .SecSec,
+        .addReadMore.showlesscontent .readLess {
+            display: none;
+        }
+
+        .addReadMore.showmorecontent .readMore {
+            display: none;
+        }
+
+        .addReadMore .readMore,
+        .addReadMore .readLess {
+            font-weight: bold;
+            margin-left: 2px;
+            color: blue;
+            cursor: pointer;
+        }
+
+        .addReadMoreWrapTxt.showmorecontent .SecSec,
+        .addReadMoreWrapTxt.showmorecontent .readLess {
+            display: block;
+        }
+
+        .glass {
+            background-color: #ffffff;
+            z-index: 100;
+            border: 10px double #00adb5;
+            border-radius: 20px;
+        }
+    </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="main">
+    <div style="z-index: -1; background-color: #00adb5;height: 400px;"><center><h1 style="padding-top: 70px;" class="text-white">Doa Harian</h1></center></div>
+    <!-- <h1 id="loadingText" class="text-center text-white" style="position: absolute; margin-top: 10px;">Sedang Memuat Doa Doa.. Mohon Tunggu...</h1> -->
+    <div class="container" id="mainFrameHadith" style="margin-top: -250px; display: block;">
+        <div class="row">
+            <div class="glass col-sm-12 col-md-5 pb-4 mb-4">
+                <h3 class=" text-center display-5 mt-4 mb-4" id="prayTitle">Doa Sebelum Makan</h3>
+                <div> <span class="lead" style="font-weight: bold;">Arab : </span>
+                    <span class="lead" style="font-weight: bold;">للّٰهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا
+                        عَذَابَ النَّارِ</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Alloohumma barik lanaa fiimaa razatanaa waqinaa 'adzaa bannar"</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan kepada kami dan
+                        peliharalah kami dari siksa api neraka</span>
+                </div>
+            </div>
+            <div class="glass col-sm-12 col-md-5 offset-md-2 mb-4">
+                <h3 class=" text-center display-5 mt-4 mb-4" id="prayTitle">Doa Sebelum Makan</h3>
+                <div> <span class="lead" style="font-weight: bold;">Arab : </span>
+                    <span class="lead" style="font-weight: bold;">للّٰهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا
+                        عَذَابَ النَّارِ</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Alloohumma barik lanaa fiimaa razatanaa waqinaa 'adzaa bannar"</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan kepada kami dan
+                        peliharalah kami dari siksa api neraka</span>
+                </div>
+            </div>
+            <div class="glass col-sm-12 col-md-5 pb-4 mb-4">
+                <h3 class=" text-center display-5 mt-4 mb-4" id="prayTitle">Doa Sebelum Makan</h3>
+                <div> <span class="lead" style="font-weight: bold;">Arab : </span>
+                    <span class="lead" style="font-weight: bold;">للّٰهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا
+                        عَذَابَ النَّارِ</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Alloohumma barik lanaa fiimaa razatanaa waqinaa 'adzaa bannar"</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan kepada kami dan
+                        peliharalah kami dari siksa api neraka</span>
+                </div>
+            </div>
+            <div class="glass col-sm-12 col-md-5 offset-md-2 mb-4">
+                <h3 class=" text-center display-5 mt-4 mb-4" id="prayTitle">Doa Sebelum Makan</h3>
+                <div> <span class="lead" style="font-weight: bold;">Arab : </span>
+                    <span class="lead" style="font-weight: bold;">للّٰهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا
+                        عَذَابَ النَّارِ</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Alloohumma barik lanaa fiimaa razatanaa waqinaa 'adzaa bannar"</span>
+                </div>
+                <div> <span class="lead" style="font-weight: bold;">Latin : </span>
+                    <span class="lead">Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan kepada kami dan
+                        peliharalah kami dari siksa api neraka</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous ">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous ">
+        </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="nabi.js"></script>
+</body>
+
+</html>

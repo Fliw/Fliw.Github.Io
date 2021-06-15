@@ -44,8 +44,13 @@
         
         .glass {
             background-color: #ffffff;
-            border-radius: 20px;
-            border : 10px double #00adb5;
+    padding: 3%;
+    margin-top: -300px;
+    z-index: 100;
+    margin-left: 200px;
+    margin-right: 200px;
+    border-radius: 50px;
+    border: 10px double #00adb5;
         }
     </style>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -54,23 +59,18 @@
 
 <body class="main">
     <div style="z-index: -1; background-color: #00adb5;height: 400px;"></div>
-    <h1 id="loadingText" class="text-center text-white" style=" margin-top: -250px;">Sedang Memuat Hadits.. Mohon Tunggu...</h1>
-    <div class="container glass" id="mainFrameHadith" style="margin-top: -300px; display: none;">
-        <div class="jumbotron" style="background-color: rgba(0, 0, 0, 0);">
-
-            <h1 class="display-4" id="hadithTitle"></h1>
-            <p class="lead">Berikut Data Hadist nya.. Jangan Lupa Baca Bismillah Ngab</p>
-            <button style="background-color: #00adb5;" class="btn text-white btnPrev">Hadist Sebelumnya</button>
-            <button style="background-color: #00adb5;" class="btn btnNext text-white">Hadist Selanjutnya</button>
+    <h1 id="loadingText" class="text-center text-white" style="margin-top: -250px;">Sedang Memuat Kisah Nabi.. Mohon Tunggu...</h1>
+    <div class="container glass" id="mainFrameHadith" style="margin-top: -250px; display: none;">
+        <div class="jumbotron text-center" style="background-color: rgba(0, 0, 0, 0);">
+            <img src="" style="border-radius: 50px;" id="nabiImg" alt="">
+            <h3 class="display-4 mt-4" id="nabiTitle"></h3>
+            <p id="nabiLahir" class="lead"></p>
+            <p id="nabiTempat" class="lead"></p>
+            <p id="nabiUmur" class="lead"></p>
             <hr class="my-4">
-            <div class="list-group" id="mainContent">
-            </div>
+            <h5 id="nabiStory" style="line-height: 40px; word-spacing: 4px;"></h5>
         </div>
     </div>
-    <nav class="navbar navbar-dark fixed-bottom" style="background-color: white;">
-        <button style="background-color: #00adb5;" class="btn text-white btnPrev">Back</button>
-        <button style="background-color: #00adb5;" class="btn btnNext text-white">Next</button>
-    </nav>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous ">
@@ -79,7 +79,7 @@
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script src="hadith.js"></script>
+    <script src="nabi.js"></script>
 </body>
 
 </html>

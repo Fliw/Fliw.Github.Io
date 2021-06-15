@@ -11,10 +11,11 @@ $(document).ready(function() {
         url: "https://api.hadith.sutanlab.id/books/" + hadithId + "?range=" + (page - 19) + "-" + page,
         type: "get",
         success: function(response) {
+            $("#loadingText").fadeOut(100);
             $("#mainFrameHadith").fadeIn(1000);
-            $("#loadingText").fadeOut(1000);
+            
             for (var x = 0; x < 19; x++) {
-                var content = '<h4> Hadist Nomor ' + response.data.hadiths[x].number + '</h4><a data-aos="zoom-in" data-aos-delay="200" style="background-color:#dbe6fd;box-shadow:-10px 0px 0px dodgerblue" class="rounded list-group-item list-group-item-action flex-column align-items-start"><div class="d-flex w-100 justify-content-"><h5 class="mb-1">' + response.data.hadiths[0].arab + '</h5></div><p class="mb-1 addReadMore showlesscontent">' + response.data.hadiths[x].id + '</p></a><br><br>';
+                var content = '<h5> Hadist Nomor ' + response.data.hadiths[x].number + '</h5><a data-aos="zoom-in" data-aos-delay="200" style="background-color:#00adb5;box-shadow:-15px 0px 0px #00d9e3;" class="rounded list-group-item text-white list-group-item-action flex-column align-items-start"><div class="d-flex w-100 justify-content-"><h5 class="mb-1">' + response.data.hadiths[x].arab + '</h5></div><p class="mb-1 addReadMore showlesscontent">' + response.data.hadiths[x].id + '</p></a><br><br>';
                 $("#mainContent").append(content);
             }
             $("#hadithTitle").html("Hadist Riwayat " + response.data.name);
@@ -51,7 +52,7 @@ function AddReadMore() {
         if (allstr.length > carLmt) {
             var firstSet = allstr.substring(0, carLmt);
             var secdHalf = allstr.substring(carLmt, allstr.length);
-            var strtoadd = firstSet + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
+            var strtoadd = firstSet + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore' style='color:white;font-weight:bold'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' style='color:white;font-weight:bold'  title='Click to Show Less'>" + readLessTxt + "</span>";
             $(this).html(strtoadd);
         }
     });

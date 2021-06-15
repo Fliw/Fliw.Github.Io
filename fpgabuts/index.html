@@ -6,106 +6,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FP WEB</title>
+    <link rel="stylesheet" href="./css/main.css">
     <style>
         html {
-            background-image: url('./img/mosque.webp');
-            background-size: cover;
-        }
-        
-        .main {
-            background-color: rgba(0, 0, 0, 0);
-        }
-        
-        .card:hover {
-            background: rgba( 255, 255, 255, 0.35);
-            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
-            backdrop-filter: blur( 1.5px);
-            -webkit-backdrop-filter: blur( 1.5px);
-            border-radius: 10px;
-            border: 1px solid rgba( 255, 255, 255, 0.18);
-        }
-        
-        .glass {
-            background: rgba( 255, 255, 255, 0.35);
-            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
-            backdrop-filter: blur( 1.5px);
-            -webkit-backdrop-filter: blur( 1.5px);
-            border-radius: 10px;
-            border: 1px solid rgba( 255, 255, 255, 0.18);
-            padding: 50px;
+            background-image: url('./img/bg.jpg');
         }
     </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body class="main">
-    <nav class="navbar navbar-dark sticky-top" style="background-color: white; border-radius: 0px 0px 10px 10px;">
-        <a class="navbar-brand text-dark" href="#">
-            <img src="https://3.bp.blogspot.com/-SDFe1Qua04w/XHbqWZyRDvI/AAAAAAAAIDk/9rGSpXejx-8212FJ0mnARObGEWjIJAl2gCK4BGAYYCw/s1600/icon%2Ballah%2Bakbar%2Bislam.png" width="35" height="35" class="d-inline-block align-top" alt=""> Aplikasi Islami
-        </a>
-        <button class="btn btn-warning my-2 my-sm-0" type="submit">Logout</button>
-    </nav>
-    <div class="container glass" style="margin-top: 8%;">
-        <h1 class="text-center mb-4 text-white"> ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</h1>
-        <div class="card-deck mt-4">
-
-            <div class="card" style="border-radius:30px">
-                <button class="btn btn-lg" data-toggle="modal" data-target="#hadithModal">
+    <div style="z-index: -1; background-color: #00adb5;height: 400px;"></div>
+    <div class="glass" data-aos="fade-in" data-aos-duration="600">
+        <h1 class="text-center" style="color: #00adb5;height: 50px;" id="typed"></h1>
+        <br>
+        <div class="card-deck mt-4" data-aos="fade-up">
+            <div class="card hvr-bounce-to-right" style="border-radius:30px">
+                <button class="btn btn-lg " data-toggle="modal" data-target="#hadithModal">
                     <div class="card-body text-center">
                         <img src="https://www.iconpacks.net/icons/2/free-opened-book-icon-3169-thumb.png" width="100px"
                             alt="">
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="text-center">
                         <h3>Hadist</h3>
                     </div>
                 </button>
             </div>
 
-            <div class="card " style="border-radius:30px ">
-                <div class="card-body text-center ">
-                    <img src="https://image.flaticon.com/icons/png/512/616/616532.png" width="100px " alt=" ">
-                </div>
-                <div class="card-footer text-center ">
-                    <h3>Kisah Nabi</h3>
-                </div>
+            <div class="card hvr-bounce-to-bottom" style="border-radius:30px ">
+                <button class="btn btn-lg " data-toggle="modal" data-target="#nabiModal">
+                    <div class="card-body text-center ">
+                        <img src="https://image.flaticon.com/icons/png/512/616/616532.png" width="100px " alt=" ">
+                    </div>
+                    <div class=" text-center ">
+                        <h3>Kisah Nabi</h3>
+                    </div>
+                </button>
             </div>
-            <div class="card " style="border-radius:30px ">
+            <div class="card hvr-bounce-to-left" style="border-radius:30px ">
                 <div class="card-body text-center ">
                     <img src="https://image.flaticon.com/icons/png/512/2858/2858338.png" width="100px " alt=" ">
                 </div>
-                <div class="card-footer text-center ">
+                <div class=" text-center ">
                     <h3>Doa-Doa</h3>
                 </div>
             </div>
         </div>
         <br>
-        <div class="card-deck ">
-            <div class="card " style="border-radius:30px ">
+        <div class="card-deck" data-aos="fade-down" data-aos-delay="600">
+            <div class="card hvr-bounce-to-right" style="border-radius:30px ">
                 <div class="card-body text-center ">
                     <img src="https://image.flaticon.com/icons/png/512/3858/3858835.png" width="100px " alt=" ">
                 </div>
-                <div class="card-footer text-center ">
+                <div class=" text-center ">
                     <h3>Niat Shalat</h3>
                 </div>
             </div>
-            <div class="card " style="border-radius:30px ">
+            <div class="card hvr-bounce-to-top" style="border-radius:30px ">
                 <div class="card-body text-center ">
                     <img src="https://image.flaticon.com/icons/png/512/4676/4676874.png" width="100px " alt=" ">
                 </div>
-                <div class="card-footer text-center ">
+                <div class=" text-center ">
                     <h3>Asmaul Husna</h3>
                 </div>
             </div>
-            <div class="card " style="border-radius:30px ">
+            <div class="card hvr-bounce-to-left" style="border-radius:30px ">
                 <div class="card-body text-center ">
                     <img src="https://image.flaticon.com/icons/png/512/3858/3858896.png" width="100px " alt=" ">
                 </div>
-                <div class="card-footer text-center ">
+                <div class=" text-center ">
                     <h3>Ceramah</h3>
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="modal fade" id="hadithModal" tabindex="-1" role="dialog" aria-labelledby="hadithModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -124,11 +101,75 @@
         </div>
     </div>
 
+    <div class="modal fade" id="nabiModal" tabindex="-1" role="dialog" aria-labelledby="nabiModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Pilih Nabi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?adam"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Adam</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?idris"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Idris</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?nuh"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Nuh</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?hud"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Hud</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?sholeh"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Sholeh</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?ibrahim"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Ibrahim</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?luth"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Luth</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?ismail"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Ismail</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?ishaq"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Ishaq</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?yaqub"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Yaqub</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?yusuf"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Yusuf</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?ayyub"><button class="btn btn-lg  text-white" style="background-color: #00adb5;"">Nabi Ayyub</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?dzulkifli"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Dzulkifli</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?syuaib"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Syu'aib</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?yunus"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Yunus</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?musa"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Musa</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?harun"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Harun</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?daud"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Daud</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?sulaiman"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Sulaiman</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?ilyas"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Ilyas</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?ilyasa"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Ilyasa</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?zakariya"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Zakariya</button></a></div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-6"><a href="nabi-layout/index.html?yahya"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Yahya</button></a></div>
+                    <div class="col-6"><a href="nabi-layout/index.html?isa"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Isa</button></a></div>
+                </div>
+                <div class="row text-center mt-4 mb-4">
+                    <div class="col-12"><a href="nabi-layout/index.html?muhammad"><button class="btn btn-lg  text-white" style="background-color: #00adb5;">Nabi Muhammad</button></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script src="main-script.js"></script>
 </body>
 
