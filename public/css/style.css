@@ -499,7 +499,7 @@ body.light hr.separator {
 }
 
 .home .bg {
-  background-image: url(https://fliwcv.firebaseapp.com/assets/images/fliw.png);
+  background-image: url('../img/fliw.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
