@@ -1568,7 +1568,7 @@ body.light hr.separator {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 576px) {
   .btn {
     font-size: 14px;
   }
