@@ -375,7 +375,7 @@
 })(jQuery);
 
 var layerCount = 5;
-var starCount = 400;
+var starCount = 100;
 var maxTime = 30;
 var universe = document.getElementById("universe");
 var w = window;
@@ -416,15 +416,25 @@ for (var i = 0; i < starCount; ++i) {
     );
 }
 
-var elem = document.querySelector(".pulse");
-var animation = elem.animate(
-    {
-        opacity: [0.5, 1],
-        transform: ["scale(0.5)", "scale(1)"]
-    },
-    {
-        direction: "alternate",
-        duration: 1000,
-        iterations: Infinity
-    }
-);
+var swiper = new Swiper('.swiper-container', {
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true,
+        },
+//        autoplay: {
+//            delay: 3000,
+//        },
+        speed: 1000,
+        effect: 'coverflow',
+        loop: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 40,
+            depth: 150,
+            modifier: 1,
+            slideShadows: false,
+        }
+    });
