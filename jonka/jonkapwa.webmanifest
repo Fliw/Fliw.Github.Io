@@ -1,0 +1,21 @@
+{
+    "name": "Jonka Jogja",
+    "short_name": "Jonka",
+    "description": "Jonka Jogja adalah website developer perumahan elit di Jogja",
+    "icons": [
+      {
+        "src": "https://jonkajogja.com/wp-content/uploads/2023/08/logo-300x190-1.png",
+        "sizes": "32x32",
+        "type": "image/png"
+      },
+      {
+        "src": "https://jonkajogja.com/wp-content/uploads/2023/08/logo-300x190-1.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "theme_color": "#633B1F",
+    "background_color": "#633B1F"
+  }
