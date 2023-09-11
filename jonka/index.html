@@ -93,7 +93,7 @@
                     <div class="d-none d-lg-block">
                         <ul class="navbar-nav flex-row justify-content-lg-end d-flex flex-wrap text-body py-2">
                             <li class="nav-item">
-                                <a class="nav-link  px-2" data-toggle="modal"
+                                <a class="nav-link  px-2"
                                     href="https://api.whatsapp.com/send?phone=6281315048080&text=Halo, Jogja Jonka">
                                     <button class="btn btn-lg btn-success">WHATSAPP</button>
                                 </a>
@@ -1493,6 +1493,25 @@
             console.log("Service Worker is not supported by browser.");
         }
     </script>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '759159602649240');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=759159602649240&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
     <script src="js/theme.js"></script>
 </body>
 
