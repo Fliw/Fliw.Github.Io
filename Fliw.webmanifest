@@ -1,0 +1,21 @@
+{
+    "name": "Fliw CV",
+    "short_name": "Fliw",
+    "description": "Website apps for Fliw CV",
+    "icons": [
+    {
+        "src": "./imgs/logo_dark.png",
+        "sizes": "32x32",
+        "type": "image/png"
+    },
+    {
+        "src": "./imgs/logo_dark.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }
+    ],
+    "start_url": "./index.html",
+    "display": "fullscreen",
+    "theme_color": "#000000",
+    "background_color": "#000000"
+}
