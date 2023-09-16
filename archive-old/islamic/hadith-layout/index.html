@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FP WEB</title>
+    <style>
+        html {
+            background-image: url('../img/bg.jpg');
+        }
+        
+        .main {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        
+        .card:hover {
+            background-color: #47597E;
+            color: white;
+        }
+        
+        .addReadMore.showlesscontent .SecSec,
+        .addReadMore.showlesscontent .readLess {
+            display: none;
+        }
+        
+        .addReadMore.showmorecontent .readMore {
+            display: none;
+        }
+        
+        .addReadMore .readMore,
+        .addReadMore .readLess {
+            font-weight: bold;
+            margin-left: 2px;
+            color: blue;
+            cursor: pointer;
+        }
+        
+        .addReadMoreWrapTxt.showmorecontent .SecSec,
+        .addReadMoreWrapTxt.showmorecontent .readLess {
+            display: block;
+        }
+        
+        .glass {
+            background-color: #ffffff;
+            border-radius: 20px;
+            border : 10px double #00adb5;
+        }
+    </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="main">
+    <div style="z-index: -1; background-color: #00adb5;height: 400px;"></div>
+    <h1 id="loadingText" class="text-center text-white" style=" margin-top: -250px;">Sedang Memuat Hadits.. Mohon Tunggu...</h1>
+    <div class="container glass" id="mainFrameHadith" style="margin-top: -300px; display: none;">
+        <div class="jumbotron" style="background-color: rgba(0, 0, 0, 0);">
+
+            <h1 class="display-4" id="hadithTitle"></h1>
+            <p class="lead">Berikut Data Hadist nya.. Jangan Lupa Baca Bismillah Ngab</p>
+            <button style="background-color: #00adb5;" class="btn text-white btnPrev">Hadist Sebelumnya</button>
+            <button style="background-color: #00adb5;" class="btn btnNext text-white">Hadist Selanjutnya</button>
+            <hr class="my-4">
+            <div class="list-group" id="mainContent">
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark fixed-bottom" style="background-color: white;">
+        <button style="background-color: #00adb5;" class="btn text-white btnPrev">Back</button>
+        <button style="background-color: #00adb5;" class="btn btnNext text-white">Next</button>
+    </nav>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous ">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous ">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="hadith.js"></script>
+</body>
+
+</html>
