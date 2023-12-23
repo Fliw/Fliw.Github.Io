@@ -92,7 +92,11 @@
                             onClick=redirectToWaOri()>Whatsapp Biasa</button>
                         <button type="button" onclick="sendWhatsapp()" class="btn btn-success btn-block btn-lg">Whatsapp
                             Bot</button>
+<<<<<<< HEAD
                         <button type="button" class="btn btn-primary btn-block btn-lg">Whatsapp Bot +
+=======
+                        <button type="button" onclick="sendWhatsappMedia()"class="btn btn-primary btn-block btn-lg">Whatsapp Bot +
+>>>>>>> 01e4b1ee6403ef67a3ba00e7415ae40f7ccd79fe
                             Attachment</button>
                     </div>
                     <div class="modal-footer">
@@ -116,6 +120,7 @@
     <script>
         new WOW().init();
         function redirectToWaOri() {
+<<<<<<< HEAD
             window.location.href = 'https://api.whatsapp.com/api/send?phone=628812671057&text=Halo Rafli Saya Mau Coba Demo Chatbot Whatsapp';
         }
         function sendWhatsapp() {
@@ -139,6 +144,108 @@
                     })
                 }
             });
+=======
+            window.location.href = 'https://api.whatsapp.com/send?phone=6289529118091&text=Halo Rafli Saya Mau Coba Demo Chatbot Whatsapp';
+        }
+        function validate() {
+            var number = $("#EMAIL").val();
+            if (number.length == 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Nomor Telepon Tidak Boleh Kosong'
+                })
+                return false;
+            } else {
+                if (number.charAt(0) == '0') {
+                    number = number.replace('0', '62');
+                }
+                if (number.charAt(0) == '+') {
+                    number = number.replace('+', '');
+                }
+                if (number.length > 13) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Nomor Telepon Tidak Boleh Lebih Dari 13 Karakter'
+                    })
+                    return false;
+                }
+                if (!/^\d+$/.test(number)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Nomor Telepon Harus Angka'
+                    })
+                    return false;
+                }
+                return true
+            }
+        }
+        function sendWhatsapp() {
+            if (validate() == true) {
+                var number = $("#EMAIL").val();
+                $.ajax({
+                    type: 'GET',
+                    data: {
+                        "api_key": 'zCtPDQTDQODrbaJnE9UFDx1eMA5VE7',
+                        "sender": '6289529118091',
+                        "number": number,
+                        "message": 'Hai, Saya Menggunakan whatsapp bot secara otomatis'
+                    },
+                    url: 'https://whatsapp.brofesional.id/send-message',
+                    cache: false,
+                    success: function () {
+                    }
+                });
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Silahkan Cek Whatsapp Anda',
+                })
+            }
+        }
+
+        function sendWhatsappMedia(){
+            if (validate() == true){
+                var number = $("#EMAIL").val();
+                $.ajax({
+                    type: 'GET',
+                    data: {
+                        "api_key": 'zCtPDQTDQODrbaJnE9UFDx1eMA5VE7',
+                        "sender": '6289529118091',
+                        "number": number,
+                        "caption": 'Hai, Saya Menggunakan whatsapp bot secara otomatis, media yang didukung untuk dikirim adalah foto, video, audio, voice note, pdf, excel, docs, ppt, dan zip',
+                        "url": 'https://media.tenor.com/HeGmyvvLTpAAAAAC/indo-ads-1.gif',
+                        "media_type": "image"
+                    },
+                    url: 'https://whatsapp.brofesional.id/send-media',
+                    cache: false,
+                    success: function () {
+                    }
+                });
+                $.ajax({
+                    type: 'GET',
+                    data: {
+                        "api_key": 'zCtPDQTDQODrbaJnE9UFDx1eMA5VE7',
+                        "sender": '6289529118091',
+                        "number": number,
+                        "caption": 'Hai, Saya Menggunakan whatsapp bot secara otomatis, media yang didukung untuk dikirim adalah foto, video, audio, voice note, pdf, excel, docs, ppt, dan zip',
+                        "url": 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_1MB.mp4',
+                        "media_type": "video"
+                    },
+                    url: 'https://whatsapp.brofesional.id/send-media',
+                    cache: false,
+                    success: function () {
+                    }
+                });
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Silahkan Cek Whatsapp Anda',
+                })
+            }
+>>>>>>> 01e4b1ee6403ef67a3ba00e7415ae40f7ccd79fe
         }
     </script>
 </body>
