@@ -92,11 +92,7 @@
                             onClick=redirectToWaOri()>Whatsapp Biasa</button>
                         <button type="button" onclick="sendWhatsapp()" class="btn btn-success btn-block btn-lg">Whatsapp
                             Bot</button>
-<<<<<<< HEAD
-                        <button type="button" class="btn btn-primary btn-block btn-lg">Whatsapp Bot +
-=======
                         <button type="button" onclick="sendWhatsappMedia()"class="btn btn-primary btn-block btn-lg">Whatsapp Bot +
->>>>>>> 01e4b1ee6403ef67a3ba00e7415ae40f7ccd79fe
                             Attachment</button>
                     </div>
                     <div class="modal-footer">
@@ -120,31 +116,6 @@
     <script>
         new WOW().init();
         function redirectToWaOri() {
-<<<<<<< HEAD
-            window.location.href = 'https://api.whatsapp.com/api/send?phone=628812671057&text=Halo Rafli Saya Mau Coba Demo Chatbot Whatsapp';
-        }
-        function sendWhatsapp() {
-            var number = $("#EMAIL").val();
-            $.ajax({
-                //define params
-                type: 'GET',
-                data: {
-                    "api_key": 'zCtPDQTDQODrbaJnE9UFDx1eMA5VE7',
-                    "sender": '6289529118091',
-                    "number": number,
-                    "message": 'Hai, Ini Menggunakan whatsapp bot secara otomatis'
-                },
-                url: 'https://whatsapp.brofesional.id/send-message',
-                cache: false,
-                success: function (html) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: 'Silahkan Cek Whatsapp Anda',
-                    })
-                }
-            });
-=======
             window.location.href = 'https://api.whatsapp.com/send?phone=6289529118091&text=Halo Rafli Saya Mau Coba Demo Chatbot Whatsapp';
         }
         function validate() {
@@ -245,7 +216,6 @@
                     text: 'Silahkan Cek Whatsapp Anda',
                 })
             }
->>>>>>> 01e4b1ee6403ef67a3ba00e7415ae40f7ccd79fe
         }
     </script>
 </body>
