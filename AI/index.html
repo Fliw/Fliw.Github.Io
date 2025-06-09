@@ -1,20 +1,118 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Vision, Stable Diffusion & Chat</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Title and Description -->
+    <title>Prabobot - AI Vision, Text2Image & Chat Assistant</title>
+    <meta name="description" content="Prabobot adalah AI assistant yang dibuat oleh Muhammad Rafli Indrawan. Fitur lengkap dengan AI Vision dari webcam, Text2Image generator, dan chat interaktif">
+    <meta name="keywords" content="AI assistant, GPT Vision, Text2Image, DALL-E, AI Chat, webcam, computer vision, artificial intelligence, Prabobot, Muhammad Rafli Indrawan, UGM">
+    <meta name="author" content="Muhammad Rafli Indrawan">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags (Facebook, LinkedIn, etc.) -->
+    <meta property="og:title" content="Prabobot - AI Vision, Text2Image & Chat Assistant">
+    <meta property="og:description" content="AI assistant dengan fitur lengkap: analisis foto webcam, generate gambar dari teks, dan chat interaktif. Dibuat oleh Muhammad Rafli Indrawan mahasiswa S2 UGM.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fliw.github.io/AI">
+    <meta property="og:image" content="https://fliw.github.io/AI/prabobot.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Prabobot AI Assistant">
+    <meta property="og:locale" content="id_ID">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prabobot - AI Vision, Text2Image & Chat Assistant">
+    <meta name="twitter:description" content="AI assistant dengan fitur lengkap: analisis foto webcam, generate gambar dari teks, dan chat interaktif.">
+    <meta name="twitter:image" content="https://fliw.github.io/AI/prabobot.png">
+    <meta name="twitter:creator" content="@your_twitter_handle">
+    
+    <!-- SEO Meta Tags -->
+    <link rel="canonical" href="https://fliw.github.io/AI">
+    <meta name="generator" content="Prabobot by Muhammad Rafli Indrawan">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/png" href="prabobot.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="prabobot.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="prabobot.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="prabobot.png">
+    <link rel="shortcut icon" href="prabobot.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4f8cff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Prabobot">
+    <meta name="application-name" content="Prabobot">
+    
+    <!-- Security Meta Tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://js.puter.com https://api.openai.com https://fonts.googleapis.com https://fonts.gstatic.com https://fliw.github.io; script-src 'self' 'unsafe-inline' https://js.puter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://js.puter.com https://api.openai.com">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Performance and Preload -->
+    <link rel="preconnect" href="https://js.puter.com">
+    <link rel="dns-prefetch" href="https://js.puter.com">
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Prabobot AI Assistant",
+        "description": "AI assistant dengan fitur AI Vision, Text2Image, dan chat interaktif",
+        "url": "https://fliw.github.io/AI",
+        "applicationCategory": "Artificial Intelligence",
+        "operatingSystem": "Web Browser",
+        "creator": {
+            "@type": "Person",
+            "name": "Muhammad Rafli Indrawan",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Universitas Gadjah Mada"
+            }
+        },
+        "featureList": [
+            "AI Vision Analysis dari Webcam",
+            "Text-to-Image Generation",
+            "Interactive AI Chat",
+            "Real-time Image Processing"
+        ],
+        "screenshot": "https://fliw.github.io/AI/prabobot.png",
+        "softwareVersion": "1.0"
+    }
+    </script>
+    
+    <!-- External Scripts -->
     <script src="https://js.puter.com/v2/"></script>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>LLM Vision, Stable Diffusion & Chat</h1>
-        <p style="color:gray">*kalau kena limit, pake incognito aja wkwk</p>
+        <h1>AI Vision & Text2Image</h1>
         <div class="tabs">
-            <button class="tab active" id="tab-vision">LLM Vision</button>
-            <button class="tab" id="tab-txt2img">Stable Diffusion</button>
-            <button class="tab" id="tab-chat">Chatbot</button>
+            <button class="tab active" id="tab-vision">Vision Webcam</button>
+            <button class="tab" id="tab-txt2img">Text2Image</button>
+            <button class="tab" id="tab-chat">AI Chat</button>
         </div>
         <div class="tab-content active" id="content-vision">
             <center>
@@ -22,10 +120,10 @@
                 <button id="capture">Ambil Foto</button>
                 <img id="snapshot" style="display:block; margin-top:10px; max-width:320px;">
             </center>
-            <pre id="result">Hasil bakalan muncul di sini...</pre>
+            <pre id="result">Hasil akan muncul di sini...</pre>
         </div>
         <div class="tab-content" id="content-txt2img">
-            <input type="text" id="txt2img-prompt" class="txt2img-input" placeholder="Foto kucing lucu dengan latar belakang taman yang cerah">
+            <input type="text" id="txt2img-prompt" class="txt2img-input" placeholder="Masukkan deskripsi gambar..." value="Foto kucing lucu dengan latar belakang taman yang cerah">
             <button id="txt2img-generate">Generate Gambar</button>
             <div id="txt2img-result" style="margin-top:18px;"></div>
         </div>
@@ -33,7 +131,7 @@
             <div class="chat-container">
                 <div class="chat-messages" id="chat-messages">
                     <div class="message assistant">
-                        Halo! Gue adalah Prabobot, Apa yang mau kamu tanyakan?
+                        Halo! Saya Prabobot, AI assistant buatan Muhammad Rafli Indrawan. Apa yang ingin kamu tanyakan?
                     </div>
                 </div>
                 <div class="chat-input-container">
@@ -43,6 +141,23 @@
             </div>
         </div>
     </div>
+    
+    <!-- Scripts -->
     <script src="script.js"></script>
+    
+    <!-- Service Worker Registration (optional) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
 </body>
 </html> 
