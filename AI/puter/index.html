@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Vision, Stable Diffusion & Chat</title>
+    <script src="https://js.puter.com/v2/"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>LLM Vision, Stable Diffusion & Chat</h1>
+        <p style="color:gray">*kalau kena limit, pake incognito aja wkwk</p>
+        <div class="tabs">
+            <button class="tab active" id="tab-vision">LLM Vision</button>
+            <button class="tab" id="tab-txt2img">Stable Diffusion</button>
+            <button class="tab" id="tab-chat">Chatbot</button>
+        </div>
+        <div class="tab-content active" id="content-vision">
+            <center>
+                <video id="webcam" autoplay playsinline width="320" height="240" style="display:block;"></video>
+                <button id="capture">Ambil Foto</button>
+                <img id="snapshot" style="display:block; margin-top:10px; max-width:320px;">
+            </center>
+            <pre id="result">Hasil bakalan muncul di sini...</pre>
+        </div>
+        <div class="tab-content" id="content-txt2img">
+            <input type="text" id="txt2img-prompt" class="txt2img-input" placeholder="Foto kucing lucu dengan latar belakang taman yang cerah">
+            <button id="txt2img-generate">Generate Gambar</button>
+            <div id="txt2img-result" style="margin-top:18px;"></div>
+        </div>
+        <div class="tab-content" id="content-chat">
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message assistant">
+                        Halo! Gue adalah Prabobot, Apa yang mau kamu tanyakan?
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') sendMessage()">
+                    <button class="send-button" onclick="sendMessage()">Kirim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
