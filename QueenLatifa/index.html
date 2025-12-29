@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clinical AI Documentation System - RS Queen Latifa Jogja</title>
+    <link rel="icon" href="https://rsu.queenlatifa.co.id/yogyakarta/wp-content/uploads/sites/2/2024/09/logo-QL-baru-Web-icon.png" sizes="32x32" />
+    <link rel="icon" href="https://rsu.queenlatifa.co.id/yogyakarta/wp-content/uploads/sites/2/2024/09/logo-QL-baru-Web-icon.png" sizes="192x192" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        --surface: #ffffff;
+        --surface-soft: #f8fbfd;
+        --primary: #4b9db6;
+        --primary-strong: #2d6f84;
+        --primary-soft: #e1f0f5;
+        --secondary: #f58c36;
+        --secondary-strong: #c76b1d;
+        --secondary-soft: #ffe5d0;
+        --border: #dde3ed;
+        --text: #193048;
+        --muted: #5c6b80;
+        --danger: #ef476f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(120deg, #e3f4fa 0%, #fff1e6 100%);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+      }
+
+      .shell {
+        width: min(100%, 960px);
+        background: var(--surface);
+        border-radius: 28px;
+        border: 1px solid rgba(75, 157, 182, 0.15);
+        box-shadow: 0 24px 70px rgba(23, 52, 76, 0.12);
+        overflow: hidden;
+      }
+
+      header {
+        padding: 40px 48px 24px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .facility-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--secondary-soft);
+        color: var(--secondary-strong);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 2vw, 2.4rem);
+        color: var(--primary-strong);
+      }
+
+      header p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+
+      .section-label {
+        margin: 16px 0 4px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .flow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 24px 0 12px;
+      }
+
+      .flow-step {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid var(--border);
+        font-weight: 500;
+      }
+
+      .flow-step::after {
+        content: "→";
+        margin-left: 12px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .flow-step:last-child::after {
+        content: "";
+        margin: 0;
+      }
+
+      .notes-emphasis {
+        color: var(--primary-strong);
+        font-weight: 600;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding: 40px 48px 48px;
+      }
+
+      .panel {
+        background: var(--surface-soft);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .panel-primary {
+        background: linear-gradient(150deg, rgba(75, 157, 182, 0.08), rgba(255, 255, 255, 0.96));
+        border-color: rgba(75, 157, 182, 0.4);
+        box-shadow: 0 14px 30px rgba(75, 157, 182, 0.18);
+      }
+
+      .panel-secondary {
+        background: linear-gradient(150deg, rgba(245, 140, 54, 0.08), rgba(255, 255, 255, 0.96));
+        border-color: rgba(245, 140, 54, 0.35);
+        box-shadow: 0 14px 34px rgba(245, 140, 54, 0.16);
+      }
+
+      .status-chip {
+        align-self: flex-start;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        background: rgba(75, 157, 182, 0.16);
+        color: var(--primary-strong);
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .status-chip[data-state="ready"] {
+        background: rgba(245, 140, 54, 0.16);
+        color: var(--secondary-strong);
+      }
+
+      .status-chip[data-state="recording"] {
+        background: rgba(239, 71, 111, 0.13);
+        color: var(--danger);
+      }
+
+      .status-chip[data-state="error"] {
+        background: rgba(239, 71, 111, 0.18);
+        color: var(--danger);
+      }
+
+      .vitals {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+      }
+
+      .vital {
+        flex: 1;
+        min-width: 160px;
+      }
+
+      .vital label {
+        display: block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .vital span {
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: var(--primary-strong);
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .input-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: #fff;
+      }
+
+      .toggle-btn {
+        border: none;
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        color: var(--muted);
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .toggle-btn.active {
+        background: var(--primary-soft);
+        color: var(--primary-strong);
+      }
+
+      .input-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .is-hidden {
+        display: none !important;
+      }
+
+      button {
+        border: none;
+        border-radius: 999px;
+        padding: 14px 22px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(75, 157, 182, 0.35);
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 30px rgba(75, 157, 182, 0.4);
+      }
+
+      .btn-secondary {
+        background: var(--secondary);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(245, 140, 54, 0.3);
+      }
+
+      .btn-secondary:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 30px rgba(245, 140, 54, 0.36);
+      }
+
+      .btn-quiet {
+        background: #e7ecf5;
+        color: var(--text);
+      }
+
+      .manual-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .manual-input {
+        width: 100%;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        padding: 16px;
+        font-size: 1rem;
+        min-height: 160px;
+        resize: vertical;
+        font-family: inherit;
+        background: #fff;
+        color: var(--text);
+      }
+
+      .manual-input:focus {
+        outline: none;
+        border-color: rgba(75, 157, 182, 0.65);
+        box-shadow: 0 0 0 3px rgba(75, 157, 182, 0.15);
+      }
+
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+        box-shadow: 0 8px 20px rgba(239, 71, 111, 0.25);
+      }
+
+      audio {
+        width: 100%;
+        border-radius: 12px;
+        margin-top: 8px;
+      }
+
+      .notes {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .llm-output {
+        background: linear-gradient(160deg, #0f1d2f 0%, #163452 100%);
+        border-radius: 20px;
+        border: 1px solid rgba(75, 157, 182, 0.25);
+        padding: 24px;
+        color: #c7d4e6;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .llm-status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        background: rgba(15, 29, 47, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-weight: 500;
+        color: #f3f6ff;
+      }
+
+      .llm-status::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #8fa5c7;
+      }
+
+      .llm-output[data-state="processing"] .llm-status::before {
+        background: var(--secondary);
+        animation: dotPulse 1.4s ease-in-out infinite;
+      }
+
+      .llm-output[data-state="ready"] .llm-status::before {
+        background: #62d2a2;
+        animation: none;
+      }
+
+      @keyframes dotPulse {
+        0%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.7;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+
+      .llm-output[data-state="processing"] .llm-status-text {
+        position: relative;
+        display: inline-flex;
+        gap: 6px;
+      }
+
+      .llm-output[data-state="processing"] .llm-status-text::after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: currentColor;
+        animation: ellipsis 1s steps(3, end) infinite;
+        box-shadow:
+          8px 0 0 currentColor,
+          16px 0 0 currentColor;
+      }
+
+      @keyframes ellipsis {
+        0% {
+          box-shadow:
+            8px 0 0 transparent,
+            16px 0 0 transparent;
+        }
+        33% {
+          box-shadow:
+            8px 0 0 currentColor,
+            16px 0 0 transparent;
+        }
+        66% {
+          box-shadow:
+            8px 0 0 currentColor,
+            16px 0 0 currentColor;
+        }
+        100% {
+          box-shadow:
+            8px 0 0 transparent,
+            16px 0 0 transparent;
+        }
+      }
+
+      .llm-section {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .llm-section h4,
+      .llm-section h5 {
+        margin: 0;
+        color: #f6faff;
+      }
+
+      .llm-section h5 {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #9fb2cf;
+      }
+
+      .llm-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+      }
+
+      .llm-pill {
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .llm-pill label {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #9fb2cf;
+        margin-bottom: 6px;
+      }
+
+      .llm-pill p {
+        margin: 0;
+        color: #f6f9ff;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .llm-rme-block {
+        border-radius: 12px;
+        background: rgba(7, 17, 32, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 14px;
+      }
+
+      .llm-rme-block h5 {
+        margin-bottom: 8px;
+      }
+
+      .llm-rme-block p {
+        margin: 4px 0 0;
+        color: #d0ddee;
+        line-height: 1.5;
+      }
+
+      .llm-list {
+        margin: 0;
+        padding-left: 18px;
+        color: #d0ddee;
+      }
+
+      .llm-orders {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+      }
+
+      .llm-order-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .llm-order-card {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(10, 22, 39, 0.6);
+        padding: 12px;
+        color: #f6f9ff;
+      }
+
+      .llm-order-card span {
+        display: block;
+        font-size: 0.85rem;
+        color: #9fb2cf;
+        margin-bottom: 6px;
+      }
+
+      .llm-empty {
+        margin: 0;
+        color: #8ea2c4;
+        font-style: italic;
+      }
+
+      .llm-alert {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(239, 71, 111, 0.12);
+        padding: 14px;
+        color: #ffe5ec;
+      }
+
+      .llm-alert strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #ffd8e1;
+      }
+
+      .llm-verification-card {
+        border-radius: 12px;
+        border: 1px dashed rgba(255, 255, 255, 0.18);
+        padding: 14px;
+        color: #d0ddee;
+        background: rgba(7, 17, 32, 0.35);
+      }
+
+      .inline-badge {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 0.85rem;
+      }
+
+      .llm-verification-card pre {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 10px;
+        padding: 10px;
+        color: #f6f9ff;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 16px;
+        }
+
+        header,
+        main {
+          padding: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <center>
+        <img src="https://rsu.queenlatifa.co.id/yogyakarta/wp-content/uploads/sites/2/2024/09/logo-QL-baru-Web-1.png" width="250px" alt=""></center>
+        <h1><br>Clinical AI Documentation System</h1>
+        <p class="section-label">Apa itu Clinical AI Documentation System?</p>
+        <p>
+          Clinical AI Documentation System merupakan platform yang mendukung dokter RS Queen Latifa
+          Jogja mendokumentasikan rekam medis secara otomatis melalui dictation, sehingga percakapan
+          klinis langsung terkonversi menjadi data terstruktur dengan presisi tinggi.
+        </p>
+        <p>
+          Dokter dapat berbicara seperti saat konsultasi rutin, sementara sistem menangani tahapan
+          berikut secara berurutan.
+        </p>
+      </header>
+      <main>
+        <section class="panel panel-primary">
+          <div class="status-chip" id="status-chip" data-state="ready">
+            Mode rekam suara aktif
+          </div>
+          <div class="input-toggle" role="tablist" aria-label="Metode input dokter">
+            <button
+              type="button"
+              class="toggle-btn active"
+              data-input-mode="voice"
+              aria-pressed="true"
+            >
+              🎙️ Rekam suara
+            </button>
+            <button
+              type="button"
+              class="toggle-btn"
+              data-input-mode="manual"
+              aria-pressed="false"
+            >
+              ✍️ Catatan manual
+            </button>
+          </div>
+          <div class="input-section" id="voice-section">
+          <div class="vitals">
+            <div class="vital">
+              <label>Durasi</label>
+              <span id="timer">00:00</span>
+            </div>
+              <div class="vital">
+                <label>Format Audio</label>
+                <span id="format-label">-</span>
+              </div>
+          </div>
+          <p class="notes">
+              Tekan mulai rekam, biarkan dokter menjelaskan kronologis klinis secara lisan, lalu
+              hentikan untuk meninjau hasil transkripsi sebelum dikirim ke SIMRS. Rekaman hanya
+              tersimpan secara lokal di perangkat ini.
+          </p>
+          <div class="controls">
+            <button class="btn-primary" id="record-btn">
+              ● Mulai Rekam
+            </button>
+            <button class="btn-danger" id="stop-btn" disabled>
+              ■ Hentikan
+            </button>
+            <button class="btn-secondary" id="reset-btn" disabled>
+              ↺ Bersihkan
+            </button>
+          </div>
+          <div>
+            <audio id="playback" controls disabled></audio>
+            </div>
+          </div>
+          <div class="input-section is-hidden" id="manual-section">
+            <label class="manual-label" for="manual-text">Catatan manual</label>
+            <textarea
+              class="manual-input"
+              id="manual-text"
+              rows="6"
+              placeholder="Tuliskan keluhan utama, temuan pemeriksaan fisik, asesmen, dan rencana tatalaksana..."
+            ></textarea>
+            <div class="controls">
+              <button class="btn-primary" id="manual-submit" disabled>
+                ⇪ Kirim ke LLM
+              </button>
+              <button class="btn-quiet" id="manual-clear" disabled>
+                ✕ Hapus catatan
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="panel panel-secondary">
+          <h3 style="margin: 0">AI Summary Analyzer</h3>
+          <p class="notes" style="margin-top: 4px">
+            AI Summary Analyzer menampilkan ringkasan klinis otomatis berbasis LLM sebelum data
+            dimasukkan ke SIMRS.
+          </p>
+          <div class="llm-output" id="llm-output" data-state="idle" aria-live="polite">
+            <div class="llm-status" id="llm-status">
+              <span class="llm-status-text">AI menunggu rekaman pertama</span>
+            </div>
+            <div class="llm-section">
+              <h4>Metadata Klinis</h4>
+              <div class="llm-grid" id="llm-meta"></div>
+            </div>
+            <div class="llm-section">
+              <h4>Rekam Medis Elektronik (RME)</h4>
+              <div id="llm-rme"></div>
+            </div>
+            <div class="llm-section">
+              <h4>Orders Terbaru</h4>
+              <div class="llm-orders">
+                <div class="llm-order-group">
+                  <h5>Farmasi</h5>
+                  <div id="llm-pharmacy"></div>
+                </div>
+                <div class="llm-order-group">
+                  <h5>Laboratorium</h5>
+                  <div id="llm-lab"></div>
+                </div>
+                <div class="llm-order-group">
+                  <h5>Radiologi</h5>
+                  <div id="llm-radiology"></div>
+                </div>
+                <div class="llm-order-group">
+                  <h5>Keperawatan</h5>
+                  <div id="llm-nursing"></div>
+                </div>
+              </div>
+            </div>
+            <div class="llm-section">
+              <h4>Instruksi Lanjutan</h4>
+              <div id="llm-follow-up"></div>
+            </div>
+            <div class="llm-section">
+              <h4>CDS Alerts</h4>
+              <div id="llm-alerts"></div>
+            </div>
+            <div class="llm-section">
+              <h4>Verifikasi & Approval</h4>
+              <div id="llm-verification"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      const recordBtn = document.getElementById("record-btn");
+      const stopBtn = document.getElementById("stop-btn");
+      const resetBtn = document.getElementById("reset-btn");
+      const playback = document.getElementById("playback");
+      const statusChip = document.getElementById("status-chip");
+      const timerText = document.getElementById("timer");
+      const formatLabel = document.getElementById("format-label");
+      const modeButtons = document.querySelectorAll("[data-input-mode]");
+      const voiceSection = document.getElementById("voice-section");
+      const manualSection = document.getElementById("manual-section");
+      const manualTextarea = document.getElementById("manual-text");
+      const manualSubmit = document.getElementById("manual-submit");
+      const manualClear = document.getElementById("manual-clear");
+      const llmOutput = document.getElementById("llm-output");
+      const llmStatus = document.getElementById("llm-status");
+      const metaContainer = document.getElementById("llm-meta");
+      const rmeContainer = document.getElementById("llm-rme");
+      const pharmacyContainer = document.getElementById("llm-pharmacy");
+      const labContainer = document.getElementById("llm-lab");
+      const radiologyContainer = document.getElementById("llm-radiology");
+      const nursingContainer = document.getElementById("llm-nursing");
+      const followUpContainer = document.getElementById("llm-follow-up");
+      const alertsContainer = document.getElementById("llm-alerts");
+      const verificationContainer = document.getElementById("llm-verification");
+      const GEMINI_ENDPOINT =
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+      const GEMINI_OUTPUT_SCHEMA = `{
+  "metadata": {
+    "patient_id": "",
+    "encounter_id": "",
+    "doctor_id": "",
+    "visit_type": "",
+    "datetime": "",
+    "llm_confidence": 0
+  },
+  "rme": {
+    "subjective": {
+      "chief_complaint": "",
+      "history_of_present_illness": "",
+      "past_medical_history": "",
+      "drug_history": {
+        "current_medications": [],
+        "allergies": []
+      }
+    },
+    "objective": {
+      "vital_signs": {
+        "blood_pressure": "",
+        "heart_rate": 0,
+        "temperature": 0,
+        "respiratory_rate": 0
+      },
+      "physical_exam": {
+        "general": "",
+        "systems": [
+          { "system": "", "finding": "" }
+        ]
+      }
+    },
+    "assessment": {
+      "provisional_diagnoses": [
+        {
+          "code_icd10": "",
+          "description": "",
+          "is_primary": true,
+          "certainty_level": ""
+        }
+      ]
+    },
+    "plan_overview": ""
+  },
+  "pharmacy_orders": [
+    {
+      "drug_name": "",
+      "dosage": "",
+      "form": "",
+      "route": "",
+      "frequency": "",
+      "duration_days": 0,
+      "special_instructions": ""
+    }
+  ],
+  "lab_orders": [
+    {
+      "test_name": "",
+      "priority": "",
+      "clinical_indication": ""
+    }
+  ],
+  "radiology_orders": [
+    {
+      "modality": "",
+      "body_region": "",
+      "view": "",
+      "clinical_question": "",
+      "priority": ""
+    }
+  ],
+  "nursing_orders": [
+    {
+      "instruction": "",
+      "frequency": "",
+      "duration": ""
+    }
+  ],
+  "follow_up": {
+    "disposition": "",
+    "follow_up_date": "",
+    "follow_up_date_note": "",
+    "follow_up_location": "",
+    "red_flag_symptoms": []
+  },
+  "cds_alerts": [
+    {
+      "type": "",
+      "severity": "",
+      "message": "",
+      "related_entities": []
+    }
+  ],
+  "verification": {
+    "needs_review": false,
+    "sections_low_confidence": [],
+    "raw_transcript": "",
+    "doctor_approval_status": ""
+  }
+}`;
+
+      let mediaRecorder;
+      let stream;
+      let chunks = [];
+      let audioUrl;
+      let timerInterval;
+      let startedAt;
+      let llmTimeout;
+      let activeMode = "voice";
+
+      const formatTime = (ms) => {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+        const seconds = String(totalSeconds % 60).padStart(2, "0");
+        return `${minutes}:${seconds}`;
+      };
+
+      const setStatus = (message, state = "ready") => {
+        statusChip.textContent = message;
+        statusChip.dataset.state = state;
+      };
+
+      const setLlmStatus = (message, state = "idle") => {
+        const statusText = llmStatus.querySelector(".llm-status-text");
+        if (statusText) {
+          statusText.textContent = message;
+        } else {
+          llmStatus.textContent = message;
+        }
+        llmOutput.dataset.state = state;
+      };
+
+      const createEmptyLlmData = () => ({
+        metadata: {
+          patient_id: "-",
+          encounter_id: "-",
+          doctor_id: "-",
+          visit_type: "-",
+          datetime: "-",
+          llm_confidence: "-",
+        },
+        rme: {
+          subjective: {
+            chief_complaint: "-",
+            history_of_present_illness: "-",
+            past_medical_history: "-",
+            drug_history: {
+              current_medications: [],
+              allergies: [],
+            },
+          },
+          objective: {
+            vital_signs: {
+              blood_pressure: "-",
+              heart_rate: "-",
+              temperature: "-",
+              respiratory_rate: "-",
+            },
+            physical_exam: {
+              general: "-",
+              systems: [],
+            },
+          },
+          assessment: {
+            provisional_diagnoses: [],
+          },
+          plan_overview: "-",
+        },
+        pharmacy_orders: [],
+        lab_orders: [],
+        radiology_orders: [],
+        nursing_orders: [],
+        follow_up: {
+          disposition: "-",
+          follow_up_date: "-",
+          follow_up_date_note: "-",
+          follow_up_location: "-",
+          red_flag_symptoms: [],
+        },
+        cds_alerts: [],
+        verification: {
+          needs_review: false,
+          sections_low_confidence: [],
+          raw_transcript: "-",
+          doctor_approval_status: "pending",
+        },
+      });
+
+      let currentLlmData = createEmptyLlmData();
+
+      const resetLlmPanel = () => {
+        if (llmTimeout) {
+          clearTimeout(llmTimeout);
+          llmTimeout = null;
+        }
+        currentLlmData = createEmptyLlmData();
+        setLlmStatus("AI menunggu rekaman baru.", "idle");
+        renderLlmData(currentLlmData);
+      };
+
+      const mockLlmTemplates = [
+        (durationLabel) => {
+          const followUpDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
+          return {
+          metadata: {
+            patient_id: "P-32M-001",
+            encounter_id: "ENC-2025-1202-001",
+            doctor_id: "DR-A",
+            visit_type: "rawat_jalan",
+            datetime: new Date().toISOString(),
+            llm_confidence: 0.93,
+          },
+          rme: {
+            subjective: {
+              chief_complaint: "Batuk tiga hari dengan demam meningkat malam hari.",
+              history_of_present_illness: `Pasien laki-laki 32 tahun dengan batuk produktif selama tiga hari, demam terutama malam, sedikit sesak. Durasi rekaman ${durationLabel}.`,
+              past_medical_history: "Tidak ada riwayat asma/TBC.",
+              drug_history: {
+                current_medications: ["Vitamin harian"],
+                allergies: ["Tidak ada alergi obat"],
+              },
+            },
+            objective: {
+              vital_signs: {
+                blood_pressure: "120/80 mmHg",
+                heart_rate: 88,
+                temperature: 38.2,
+                respiratory_rate: 20,
+              },
+              physical_exam: {
+                general: "Kesadaran baik, tampak lemas ringan.",
+                systems: [
+                  {
+                    system: "paru",
+                    finding: "Ronkhi basal bilateral, suara napas lainnya dalam batas normal.",
+                  },
+                ],
+              },
+            },
+            assessment: {
+              provisional_diagnoses: [
+                {
+                  code_icd10: "J18.9",
+                  description: "Pneumonia komunitas",
+                  is_primary: true,
+                  certainty_level: "suspected",
+                },
+              ],
+            },
+            plan_overview:
+              "Rawat jalan dengan antibiotik oral, X-ray thorax, lab darah lengkap, kontrol ulang 3 hari.",
+          },
+          pharmacy_orders: [
+            {
+              drug_name: "Amoxicillin",
+              dosage: "500 mg",
+              form: "tablet",
+              route: "oral",
+              frequency: "3x sehari",
+              duration_days: 7,
+              special_instructions: "Setelah makan",
+            },
+          ],
+          lab_orders: [
+            {
+              test_name: "Darah lengkap",
+              priority: "routine",
+              clinical_indication: "Evaluasi infeksi",
+            },
+          ],
+          radiology_orders: [
+            {
+              modality: "X-ray",
+              body_region: "thorax",
+              view: "PA",
+              clinical_question: "Rule out pneumonia",
+              priority: "urgent",
+            },
+          ],
+          nursing_orders: [
+            {
+              instruction: "Monitor suhu",
+              frequency: "q4h",
+              duration: "24h",
+            },
+          ],
+          follow_up: {
+            disposition: "pulang",
+            follow_up_date: followUpDate,
+            follow_up_date_note: "Kontrol ulang 3 hari",
+            follow_up_location: "Poli umum",
+            red_flag_symptoms: ["Demam tinggi tidak turun", "Sesak napas memburuk"],
+          },
+          cds_alerts: [
+            {
+              type: "drug_interaction",
+              severity: "medium",
+              message: "Periksa interaksi Amoxicillin dengan obat rutin pasien.",
+              related_entities: ["Amoxicillin", "Vitamin harian"],
+            },
+          ],
+          verification: {
+            needs_review: true,
+            sections_low_confidence: ["assessment"],
+            raw_transcript: `Durasi rekaman ${durationLabel}.`,
+            doctor_approval_status: "pending",
+          },
+        };
+        },
+        (durationLabel) => {
+          const followUpDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+          return {
+          metadata: {
+            patient_id: "P-45F-014",
+            encounter_id: "ENC-2025-1202-018",
+            doctor_id: "DR-B",
+            visit_type: "fisioterapi",
+            datetime: new Date().toISOString(),
+            llm_confidence: 0.9,
+          },
+          rme: {
+            subjective: {
+              chief_complaint: "Nyeri bahu kanan saat mengangkat lengan.",
+              history_of_present_illness: `Keluhan sejak satu minggu, memburuk saat aktivitas overhead. Durasi rekaman ${durationLabel}.`,
+              past_medical_history: "Tidak ada riwayat trauma mayor.",
+              drug_history: {
+                current_medications: [],
+                allergies: ["NSAID menyebabkan dispepsia"],
+              },
+            },
+            objective: {
+              vital_signs: {
+                blood_pressure: "118/76 mmHg",
+                heart_rate: 78,
+                temperature: 36.8,
+                respiratory_rate: 18,
+              },
+              physical_exam: {
+                general: "Postur baik, tampak menahan nyeri.",
+                systems: [
+                  {
+                    system: "musculoskeletal",
+                    finding: "Tes Hawkins positif, kekuatan abduksi menurun.",
+                  },
+                ],
+              },
+            },
+            assessment: {
+              provisional_diagnoses: [
+                {
+                  code_icd10: "M75.1",
+                  description: "Tendinitis rotator cuff",
+                  is_primary: true,
+                  certainty_level: "probable",
+                },
+              ],
+            },
+            plan_overview:
+              "Latihan rentang gerak, kompres hangat, NSAID PRN, evaluasi ulang 1 minggu.",
+          },
+          pharmacy_orders: [
+            {
+              drug_name: "Ibuprofen",
+              dosage: "400 mg",
+              form: "tablet",
+              route: "oral",
+              frequency: "3x sehari PRN",
+              duration_days: 5,
+              special_instructions: "Sesudah makan",
+            },
+          ],
+          lab_orders: [],
+          radiology_orders: [
+            {
+              modality: "USG",
+              body_region: "bahu kanan",
+              view: "Longitudinal",
+              clinical_question: "Evaluasi robekan rotator cuff",
+              priority: "routine",
+            },
+          ],
+          nursing_orders: [
+            {
+              instruction: "Ajarkan latihan pendulum",
+              frequency: "2x/hari",
+              duration: "7 hari",
+            },
+          ],
+          follow_up: {
+            disposition: "pulang",
+            follow_up_date: followUpDate,
+            follow_up_date_note: "Kontrol ulang 7 hari",
+            follow_up_location: "Klinik rehabilitasi",
+            red_flag_symptoms: ["Nyeri bertambah berat", "Muncul kelemahan baru"],
+          },
+          cds_alerts: [],
+          verification: {
+            needs_review: false,
+            sections_low_confidence: [],
+            raw_transcript: `Durasi rekaman ${durationLabel}.`,
+            doctor_approval_status: "draft",
+          },
+        };
+        },
+        (durationLabel) => {
+          const followUpDate = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString();
+          return {
+          metadata: {
+            patient_id: "P-27F-022",
+            encounter_id: "ENC-2025-1202-030",
+            doctor_id: "DR-C",
+            visit_type: "rawat_jalan",
+            datetime: new Date().toISOString(),
+            llm_confidence: 0.88,
+          },
+          rme: {
+            subjective: {
+              chief_complaint: "Kembung dan mual setelah makan pedas.",
+              history_of_present_illness: `Keluhan selama dua hari, disertai rasa panas ulu hati. Durasi rekaman ${durationLabel}.`,
+              past_medical_history: "Gastritis ringan 2 tahun lalu.",
+              drug_history: {
+                current_medications: [],
+                allergies: ["Tidak ada"],
+              },
+            },
+            objective: {
+              vital_signs: {
+                blood_pressure: "110/70 mmHg",
+                heart_rate: 82,
+                temperature: 36.7,
+                respiratory_rate: 18,
+              },
+              physical_exam: {
+                general: "Tampak nyaman, tidak ada distress.",
+                systems: [
+                  {
+                    system: "abdomen",
+                    finding: "Nyeri tekan epigastrium ringan, tidak ada defans.",
+                  },
+                ],
+              },
+            },
+            assessment: {
+              provisional_diagnoses: [
+                {
+                  code_icd10: "K30",
+                  description: "Dispepsia fungsional",
+                  is_primary: true,
+                  certainty_level: "suspected",
+                },
+              ],
+            },
+            plan_overview: "Modifikasi diet, antasida, edu tanda bahaya, kontrol 5 hari.",
+          },
+          pharmacy_orders: [
+            {
+              drug_name: "Antasida suspensi",
+              dosage: "10 ml",
+              form: "sirup",
+              route: "oral",
+              frequency: "3x sehari",
+              duration_days: 5,
+              special_instructions: "30 menit sebelum makan",
+            },
+          ],
+          lab_orders: [],
+          radiology_orders: [],
+          nursing_orders: [],
+          follow_up: {
+            disposition: "pulang",
+            follow_up_date: followUpDate,
+            follow_up_date_note: "Kontrol ulang 5 hari",
+            follow_up_location: "Poli penyakit dalam",
+            red_flag_symptoms: ["Muntah darah", "Nyeri hebat menetap"],
+          },
+          cds_alerts: [
+            {
+              type: "education",
+              severity: "low",
+              message: "Pastikan edukasi diet rendah asam diberikan.",
+              related_entities: ["Dispepsia fungsional"],
+            },
+          ],
+          verification: {
+            needs_review: false,
+            sections_low_confidence: [],
+            raw_transcript: `Durasi rekaman ${durationLabel}.`,
+            doctor_approval_status: "draft",
+          },
+        };
+        },
+      ];
+
+      const getGeminiApiKeyFromWindow = () => {
+        const globalKey = typeof window !== "undefined" ? window.GEMINI_API_KEY : "";
+        return typeof globalKey === "string" ? globalKey.trim() : "";
+      };
+
+      const getStoredGeminiKey = () => {
+        try {
+          return "AIzaSyB5Eg3H3C-czKQpTuh_W8aYuvzh_qbapL4";
+        } catch {
+          return "";
+        }
+      };
+
+      const persistGeminiKey = (key) => {
+        try {
+          localStorage.setItem("geminiApiKey", key);
+        } catch {
+          // noop
+        }
+      };
+
+      const promptForGeminiKey = () =>
+        window
+          .prompt("Masukkan Gemini API key Anda (disimpan secara lokal pada perangkat ini).")
+          ?.trim() || "";
+
+      const ensureGeminiApiKey = () => {
+        const envKey = getGeminiApiKeyFromWindow();
+        if (envKey) return envKey;
+        const storedKey = getStoredGeminiKey();
+        if (storedKey) return storedKey;
+        const requestedKey = promptForGeminiKey();
+        if (requestedKey) {
+          persistGeminiKey(requestedKey);
+        }
+        return requestedKey;
+      };
+
+      const buildMockLlmPayload = (durationLabel) => {
+        const templateBuilder = mockLlmTemplates[Math.floor(Math.random() * mockLlmTemplates.length)];
+        return templateBuilder(durationLabel);
+      };
+
+      const renderMetadata = (metadata = {}) => {
+        const entries = [
+          { label: "ID Pasien", value: metadata.patient_id },
+          { label: "ID Kunjungan", value: metadata.encounter_id },
+          { label: "Dokter", value: metadata.doctor_id },
+          { label: "Tipe Kunjungan", value: metadata.visit_type },
+          { label: "Tanggal", value: formatDateTime(metadata.datetime) },
+          {
+            label: "Confidence",
+            value:
+              typeof metadata.llm_confidence === "number"
+                ? `${Math.round(metadata.llm_confidence * 100)}%`
+                : metadata.llm_confidence,
+          },
+        ];
+        metaContainer.innerHTML = entries
+          .map(
+            ({ label, value }) => `
+              <div class="llm-pill">
+                <label>${label}</label>
+                <p>${value && value !== "" ? value : "-"}</p>
+              </div>
+            `,
+          )
+          .join("");
+      };
+
+      const renderListOrPlaceholder = (items, formatter, placeholder = "Belum ada data.") => {
+        if (!items?.length) {
+          return `<p class="llm-empty">${placeholder}</p>`;
+        }
+        return items.map(formatter).join("");
+      };
+
+      const renderRme = (rme = {}) => {
+        const subjective = rme.subjective || {};
+        const objective = rme.objective || {};
+        const assessment = rme.assessment || {};
+        const planOverview = rme.plan_overview || "-";
+        const meds = ensureArray(subjective.drug_history?.current_medications);
+        const allergies = ensureArray(subjective.drug_history?.allergies);
+        const systems = ensureArray(objective.physical_exam?.systems);
+        const diagnoses = ensureArray(assessment.provisional_diagnoses);
+
+        rmeContainer.innerHTML = `
+          <div class="llm-rme-block">
+            <h5>Subjective</h5>
+            <p><strong>Keluhan utama:</strong> ${subjective.chief_complaint || "-"}</p>
+            <p><strong>Riwayat keluhan:</strong> ${subjective.history_of_present_illness || "-"}</p>
+            <p><strong>Riwayat penyakit dahulu:</strong> ${subjective.past_medical_history || "-"}</p>
+            <p><strong>Obat berjalan:</strong> ${meds.length ? meds.join(", ") : "-"}</p>
+            <p><strong>Alergi:</strong> ${allergies.length ? allergies.join(", ") : "-"}</p>
+          </div>
+          <div class="llm-rme-block">
+            <h5>Objective</h5>
+            <p><strong>Tanda vital:</strong> BP ${objective.vital_signs?.blood_pressure || "-"}, HR ${
+          objective.vital_signs?.heart_rate ?? "-"
+        } bpm, Temp ${objective.vital_signs?.temperature ?? "-"}°C, RR ${
+          objective.vital_signs?.respiratory_rate ?? "-"
+        }/menit.</p>
+            <p><strong>General:</strong> ${objective.physical_exam?.general || "-"}</p>
+            <div>
+              <strong>Sistem:</strong>
+              ${renderListOrPlaceholder(
+                systems,
+                (item) => `<p>- ${item.system}: ${item.finding}</p>`,
+                "Belum ada temuan sistem.",
+              )}
+            </div>
+          </div>
+          <div class="llm-rme-block">
+            <h5>Assessment</h5>
+            ${renderListOrPlaceholder(
+              diagnoses,
+              (dx) =>
+                `<p>- [${dx.code_icd10 || "-"}] ${dx.description || "-"} (${dx.certainty_level || "-"}${
+                  dx.is_primary ? ", primer" : ""
+                })</p>`,
+              "Belum ada diagnosis.",
+            )}
+          </div>
+          <div class="llm-rme-block">
+            <h5>Plan Overview</h5>
+            <p>${planOverview}</p>
+          </div>
+        `;
+      };
+
+      const renderOrders = ({
+        pharmacy = [],
+        lab = [],
+        radiology = [],
+        nursing = [],
+      } = {}) => {
+        const renderOrderCard = (content) => `<div class="llm-order-card">${content}</div>`;
+
+        pharmacyContainer.innerHTML = renderListOrPlaceholder(
+          ensureArray(pharmacy),
+          (order) =>
+            renderOrderCard(`
+              <span>${order.drug_name || "-"}</span>
+              <p>Dosis: ${order.dosage || "-"} (${order.form || "-"})</p>
+              <p>Rute/Frekuensi: ${order.route || "-"} / ${order.frequency || "-"}</p>
+              <p>Durasi: ${order.duration_days ? `${order.duration_days} hari` : "-"}</p>
+              <p>Catatan: ${order.special_instructions || "-"}</p>
+            `),
+        );
+
+        labContainer.innerHTML = renderListOrPlaceholder(
+          ensureArray(lab),
+          (order) =>
+            renderOrderCard(`
+              <span>${order.test_name || "-"}</span>
+              <p>Indikasi: ${order.clinical_indication || "-"}</p>
+              <p>Prioritas: ${order.priority || "-"}</p>
+            `),
+        );
+
+        radiologyContainer.innerHTML = renderListOrPlaceholder(
+          ensureArray(radiology),
+          (order) =>
+            renderOrderCard(`
+              <span>${order.modality || "-"} - ${order.body_region || "-"}</span>
+              <p>View: ${order.view || "-"}</p>
+              <p>Pertanyaan klinis: ${order.clinical_question || "-"}</p>
+              <p>Prioritas: ${order.priority || "-"}</p>
+            `),
+        );
+
+        nursingContainer.innerHTML = renderListOrPlaceholder(
+          ensureArray(nursing),
+          (order) =>
+            renderOrderCard(`
+              <span>${order.instruction || "-"}</span>
+              <p>Frekuensi: ${order.frequency || "-"}</p>
+              <p>Durasi: ${order.duration || "-"}</p>
+            `),
+        );
+      };
+
+      const renderFollowUp = (followUp = {}) => {
+        const redFlags = ensureArray(followUp.red_flag_symptoms);
+        const followDate = formatDateTime(followUp.follow_up_date);
+        followUpContainer.innerHTML = `
+          <div class="llm-rme-block">
+            <p><strong>Disposition:</strong> ${followUp.disposition || "-"}</p>
+            <p><strong>Jadwal kontrol:</strong> ${followDate}${
+          followUp.follow_up_date_note && followUp.follow_up_date_note !== "-"
+            ? ` (${followUp.follow_up_date_note})`
+            : ""
+        }</p>
+            <p><strong>Lokasi:</strong> ${followUp.follow_up_location || "-"}</p>
+            <div>
+              <strong>Red flag:</strong>
+              ${renderListOrPlaceholder(
+                redFlags,
+                (flag) => `<p>- ${flag}</p>`,
+                "Tidak ada red flag yang dicatat.",
+              )}
+            </div>
+          </div>
+        `;
+      };
+
+      const renderAlerts = (alerts = []) => {
+        alertsContainer.innerHTML = renderListOrPlaceholder(
+          ensureArray(alerts),
+          (alert) => {
+            const entities = ensureArray(alert.related_entities);
+            const entityText = entities.length ? entities.join(", ") : "-";
+            return `
+              <div class="llm-alert">
+                <strong>${alert.type || "Alert"} • ${alert.severity || "-"}</strong>
+                <p>${alert.message || "-"}</p>
+                <p><small>Entitas terkait: ${entityText}</small></p>
+              </div>
+            `;
+          },
+          "Tidak ada alert klinis.",
+        );
+      };
+
+      const renderVerification = (verification = {}) => {
+        const sectionsHtml = renderListOrPlaceholder(
+          ensureArray(verification.sections_low_confidence),
+          (section) => `<p>- ${section}</p>`,
+          "Tidak ada bagian berisiko rendah.",
+        );
+        verificationContainer.innerHTML = `
+          <div class="llm-verification-card">
+            <p><strong>Kebutuhan review:</strong> ${
+              verification.needs_review ? "Perlu verifikasi dokter" : "Siap disetujui"
+            }</p>
+            <p><strong>Status approval:</strong> ${verification.doctor_approval_status || "-"}</p>
+            <div>
+              <strong>Seksi low confidence:</strong>
+              ${sectionsHtml}
+            </div>
+            <div>
+              <strong>Transkrip mentah:</strong>
+              <pre style="white-space: pre-wrap; margin: 6px 0 0; font-family: inherit;">${verification.raw_transcript || "-"}</pre>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderLlmData = (data) => {
+        currentLlmData = data;
+        renderMetadata(data.metadata);
+        renderRme(data.rme);
+        renderOrders({
+          pharmacy: data.pharmacy_orders,
+          lab: data.lab_orders,
+          radiology: data.radiology_orders,
+          nursing: data.nursing_orders,
+        });
+        renderFollowUp(data.follow_up);
+        renderAlerts(data.cds_alerts);
+        renderVerification(data.verification);
+      };
+
+      const processLlmOutput = (durationLabel) => {
+        setLlmStatus("Memproses rekaman melalui LLM...", "processing");
+        if (llmTimeout) {
+          clearTimeout(llmTimeout);
+        }
+        llmTimeout = setTimeout(() => {
+          const payload = buildMockLlmPayload(durationLabel);
+          renderLlmData(payload);
+          setLlmStatus("Output LLM terbaru siap ditinjau.", "ready");
+          llmTimeout = null;
+        }, 1200);
+      };
+
+      const formatDateTime = (value) => {
+        if (!value || value === "-") return "-";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) {
+          return value;
+        }
+        return new Intl.DateTimeFormat("id-ID", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        }).format(date);
+      };
+
+      const ensureArray = (value) => (Array.isArray(value) ? value : []);
+
+      const pickArray = (primary, secondary = []) => {
+        const first = ensureArray(primary);
+        if (first.length) return first;
+        const second = ensureArray(secondary);
+        return second.length ? second : [];
+      };
+
+      const buildManualPayload = (note) => {
+        const lines = note
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean);
+        const firstLine = lines[0] || note.slice(0, 120);
+        const nowIso = new Date().toISOString();
+        return {
+          metadata: {
+            patient_id: "-",
+            encounter_id: "-",
+            doctor_id: "-",
+            visit_type: "manual_entry",
+            datetime: nowIso,
+            llm_confidence: 0.5,
+          },
+          rme: {
+            subjective: {
+              chief_complaint: firstLine || "Keluhan utama belum dituliskan.",
+              history_of_present_illness: note,
+              past_medical_history: "-",
+              drug_history: {
+                current_medications: [],
+                allergies: [],
+              },
+            },
+            objective: {
+              vital_signs: {
+                blood_pressure: "-",
+                heart_rate: "-",
+                temperature: "-",
+                respiratory_rate: "-",
+              },
+              physical_exam: {
+                general: "-",
+                systems: [],
+              },
+            },
+            assessment: {
+              provisional_diagnoses: [
+                {
+                  code_icd10: "-",
+                  description: "Perlu verifikasi klinis.",
+                  is_primary: true,
+                  certainty_level: "unspecified",
+                },
+              ],
+            },
+            plan_overview: "Rencana tatalaksana akan ditentukan setelah review dokter.",
+          },
+          pharmacy_orders: [],
+          lab_orders: [],
+          radiology_orders: [],
+          nursing_orders: [],
+          follow_up: {
+            disposition: "Menunggu instruksi dokter.",
+            follow_up_date: "-",
+            follow_up_date_note: "-",
+            follow_up_location: "-",
+            red_flag_symptoms: [],
+          },
+          cds_alerts: [],
+          verification: {
+            needs_review: true,
+            sections_low_confidence: ["assessment", "plan_overview"],
+            raw_transcript: note,
+            doctor_approval_status: "pending",
+          },
+        };
+      };
+
+      const buildGeminiPrompt = (note) =>
+        [
+          "Anda adalah Clinical AI Documentation System RS Queen Latifa Jogja.",
+          "Tugas Anda:",
+          "- Menyusun ringkasan rekam medis elektronik secara terstruktur.",
+          "- Tidak menambahkan informasi yang tidak disebutkan (hindari halusinasi).",
+          "- Jika data tidak tersedia, isi dengan \"unknown\" atau [] sesuai tipe field.",
+          "- Sertakan transkrip mentah pada field verification.raw_transcript.",
+          "",
+          "Data input dokter:",
+          `\"\"\"${note}\"\"\"`,
+          "",
+          "Kembalikan HANYA JSON valid dengan struktur berikut (ikuti tipe data dan nama field persis):",
+          GEMINI_OUTPUT_SCHEMA,
+          "",
+          "Instruksi tambahan:",
+          "- Gunakan bahasa Indonesia formal.",
+          "- llm_confidence gunakan angka 0-1.",
+          "- related_entities dan sections_low_confidence berupa array string.",
+          "- Jika tidak ada alert, kembalikan cds_alerts sebagai array kosong.",
+        ].join("\n");
+
+      const extractJsonFromGemini = (text) => {
+        if (!text) {
+          throw new Error("Respons Gemini kosong.");
+        }
+        const sanitized = text.replace(/```json|```/gi, "").trim();
+        const jsonMatch = sanitized.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) {
+          throw new Error("Format JSON tidak ditemukan pada respons.");
+        }
+        return JSON.parse(jsonMatch[0]);
+      };
+
+      const sanitizeGeminiPayload = (data, fallback) => {
+        const safe = createEmptyLlmData();
+        const source = data || {};
+        const base = fallback || safe;
+
+        safe.metadata = {
+          ...safe.metadata,
+          ...base.metadata,
+          ...(source.metadata || {}),
+        };
+
+        const sourceSubjective = source.rme?.subjective || {};
+        const baseSubjective = base.rme.subjective;
+        const sourceObjective = source.rme?.objective || {};
+        const baseObjective = base.rme.objective;
+        const sourceAssessment = source.rme?.assessment || {};
+        const baseAssessment = base.rme.assessment;
+
+        safe.rme = {
+          ...safe.rme,
+          ...base.rme,
+          ...source.rme,
+          subjective: {
+            ...safe.rme.subjective,
+            ...base.rme.subjective,
+            ...sourceSubjective,
+            drug_history: {
+              ...safe.rme.subjective.drug_history,
+              ...base.rme.subjective.drug_history,
+              ...(sourceSubjective.drug_history || {}),
+              current_medications: pickArray(
+                sourceSubjective.drug_history?.current_medications,
+                baseSubjective.drug_history.current_medications,
+              ),
+              allergies: pickArray(
+                sourceSubjective.drug_history?.allergies,
+                baseSubjective.drug_history.allergies,
+              ),
+            },
+          },
+          objective: {
+            ...safe.rme.objective,
+            ...base.rme.objective,
+            ...sourceObjective,
+            vital_signs: {
+              ...safe.rme.objective.vital_signs,
+              ...base.rme.objective.vital_signs,
+              ...(sourceObjective.vital_signs || {}),
+            },
+            physical_exam: {
+              ...safe.rme.objective.physical_exam,
+              ...base.rme.objective.physical_exam,
+              ...(sourceObjective.physical_exam || {}),
+              systems: pickArray(
+                sourceObjective.physical_exam?.systems,
+                baseObjective.physical_exam.systems,
+              ),
+            },
+          },
+          assessment: {
+            ...safe.rme.assessment,
+            ...base.rme.assessment,
+            ...sourceAssessment,
+            provisional_diagnoses: pickArray(
+              sourceAssessment.provisional_diagnoses,
+              baseAssessment.provisional_diagnoses,
+            ),
+          },
+          plan_overview: source.rme?.plan_overview || base.rme.plan_overview || safe.rme.plan_overview,
+        };
+
+        safe.pharmacy_orders = pickArray(source.pharmacy_orders, base.pharmacy_orders);
+        safe.lab_orders = pickArray(source.lab_orders, base.lab_orders);
+        safe.radiology_orders = pickArray(source.radiology_orders, base.radiology_orders);
+        safe.nursing_orders = pickArray(source.nursing_orders, base.nursing_orders);
+
+        safe.follow_up = {
+          ...safe.follow_up,
+          ...base.follow_up,
+          ...(source.follow_up || {}),
+          follow_up_date: source.follow_up?.follow_up_date || base.follow_up.follow_up_date,
+          red_flag_symptoms: pickArray(
+            source.follow_up?.red_flag_symptoms,
+            base.follow_up.red_flag_symptoms,
+          ),
+        };
+
+        safe.cds_alerts = pickArray(source.cds_alerts, base.cds_alerts);
+
+        const baseVerification = base.verification || safe.verification;
+        const sourceVerification = source.verification || {};
+        safe.verification = {
+          ...safe.verification,
+          ...baseVerification,
+          ...sourceVerification,
+          sections_low_confidence: pickArray(
+            sourceVerification.sections_low_confidence,
+            baseVerification.sections_low_confidence,
+          ),
+        };
+
+        return safe;
+      };
+
+      const requestGeminiSummary = async (note, apiKey) => {
+        const response = await fetch(`${GEMINI_ENDPOINT}?key=${encodeURIComponent(apiKey)}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: buildGeminiPrompt(note),
+                  },
+                ],
+              },
+            ],
+          }),
+        });
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Gemini API error (${response.status}): ${errorText}`);
+        }
+        const data = await response.json();
+        const text =
+          data.candidates?.[0]?.content?.parts
+            ?.map((part) => part.text || "")
+            .join("")
+            .trim() || "";
+        const parsed = extractJsonFromGemini(text);
+        return parsed;
+      };
+
+      const processManualInput = async (note) => {
+        setLlmStatus("Mengirim catatan manual ke Model...", "processing");
+        if (llmTimeout) {
+          clearTimeout(llmTimeout);
+          llmTimeout = null;
+        }
+        const apiKey = ensureGeminiApiKey();
+        if (!apiKey) {
+          setLlmStatus("Gemini API key belum diatur. Proses dibatalkan.", "error");
+          setStatus("Gemini API key wajib diisi untuk analisis manual.", "error");
+          return;
+        }
+        const fallbackPayload = buildManualPayload(note);
+        try {
+          const payload = await requestGeminiSummary(note, apiKey);
+          renderLlmData(sanitizeGeminiPayload(payload, fallbackPayload));
+          setLlmStatus("Output LLM terbaru siap ditinjau.", "ready");
+        } catch (error) {
+          console.error("Gemini API gagal:", error);
+          renderLlmData(fallbackPayload);
+          setLlmStatus("Gagal memproses via Gemini. Menampilkan ringkasan lokal.", "error");
+        }
+      };
+
+      const updateManualActionsState = () => {
+        const hasText = Boolean(manualTextarea.value.trim());
+        manualSubmit.disabled = !hasText;
+        manualClear.disabled = !hasText;
+      };
+
+      const resetManualInput = () => {
+        manualTextarea.value = "";
+        updateManualActionsState();
+      };
+
+      const syncInputSections = () => {
+        voiceSection.classList.toggle("is-hidden", activeMode !== "voice");
+        manualSection.classList.toggle("is-hidden", activeMode !== "manual");
+      };
+
+      resetLlmPanel();
+      updateManualActionsState();
+      syncInputSections();
+
+      const resetTimer = () => {
+        clearInterval(timerInterval);
+        timerText.textContent = "00:00";
+      };
+
+      const updateTimer = () => {
+        resetTimer();
+        timerInterval = setInterval(() => {
+          const now = Date.now();
+          timerText.textContent = formatTime(now - startedAt);
+        }, 500);
+      };
+
+      const stopStream = () => {
+        if (stream) {
+          stream.getTracks().forEach((track) => track.stop());
+          stream = null;
+        }
+      };
+
+      const handleStop = () => {
+        if (mediaRecorder && mediaRecorder.state !== "inactive") {
+          mediaRecorder.stop();
+        }
+        stopStream();
+        stopBtn.disabled = true;
+        recordBtn.disabled = false;
+      };
+
+      const handleReset = () => {
+        stopStream();
+        if (audioUrl) {
+          URL.revokeObjectURL(audioUrl);
+          audioUrl = null;
+        }
+        playback.src = "";
+        playback.disabled = true;
+        chunks = [];
+        mediaRecorder = null;
+        formatLabel.textContent = "-";
+        resetManualInput();
+        resetLlmPanel();
+        resetTimer();
+        setStatus("Siap merekam ulang", "ready");
+        resetBtn.disabled = true;
+        startedAt = null;
+      };
+
+      const handleRecord = async () => {
+        if (!navigator.mediaDevices?.getUserMedia) {
+          setStatus("Peramban belum mendukung rekaman audio.", "error");
+          return;
+        }
+
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          chunks = [];
+          mediaRecorder.addEventListener("dataavailable", (event) => {
+            if (event.data.size) {
+              chunks.push(event.data);
+            }
+          });
+
+          mediaRecorder.addEventListener("stop", () => {
+            const durationLabel = startedAt ? formatTime(Date.now() - startedAt) : "00:00";
+            if (!chunks.length) {
+              setStatus("Tidak ada data audio. Coba rekam ulang.", "error");
+              resetLlmPanel();
+              return;
+            }
+            const blob = new Blob(chunks, { type: chunks[0]?.type || "audio/webm" });
+            if (audioUrl) {
+              URL.revokeObjectURL(audioUrl);
+            }
+            audioUrl = URL.createObjectURL(blob);
+            playback.src = audioUrl;
+            playback.disabled = false;
+            const format = blob.type.replace("audio/", "").toUpperCase();
+            formatLabel.textContent = format;
+            resetBtn.disabled = false;
+            setStatus("Rekaman siap diputar.", "ready");
+            processLlmOutput(durationLabel);
+            resetTimer();
+          });
+
+          mediaRecorder.start();
+          setLlmStatus("LLM menunggu rekaman selesai sebelum memproses.", "pending");
+          startedAt = Date.now();
+          updateTimer();
+          setStatus("Sedang merekam... jaga jarak 10 cm dari mikrofon.", "recording");
+          recordBtn.disabled = true;
+          stopBtn.disabled = false;
+          playback.disabled = true;
+        } catch (error) {
+          handleReset();
+          const msg =
+            error.name === "NotAllowedError"
+              ? "Akses mikrofon diblokir. Izinkan melalui ikon gembok."
+              : "Gagal menyiapkan mikrofon. Muat ulang dan coba lagi.";
+          setStatus(msg, "error");
+          resetLlmPanel();
+        }
+      };
+
+      const switchInputMode = (mode) => {
+        if (!mode || mode === activeMode) {
+          return;
+        }
+        activeMode = mode;
+        modeButtons.forEach((btn) => {
+          const isActive = btn.dataset.inputMode === mode;
+          btn.classList.toggle("active", isActive);
+          btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+        syncInputSections();
+        if (mode === "voice") {
+          setStatus("Mode rekam suara aktif.", "ready");
+        } else {
+          if (mediaRecorder && mediaRecorder.state === "recording") {
+            handleStop();
+          }
+          stopStream();
+          setStatus("Mode catatan manual aktif.", "ready");
+        }
+      };
+
+      recordBtn.addEventListener("click", handleRecord);
+      stopBtn.addEventListener("click", handleStop);
+      resetBtn.addEventListener("click", handleReset);
+      modeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => switchInputMode(btn.dataset.inputMode));
+      });
+      manualTextarea.addEventListener("input", updateManualActionsState);
+      manualSubmit.addEventListener("click", async () => {
+        const note = manualTextarea.value.trim();
+        if (!note) {
+          setStatus("Catatan manual belum diisi.", "error");
+          return;
+        }
+        setStatus("Catatan manual dikirim untuk dianalisis.", "ready");
+        manualTextarea.readOnly = true;
+        manualSubmit.disabled = true;
+        manualClear.disabled = true;
+        try {
+          await processManualInput(note);
+        } finally {
+          manualTextarea.readOnly = false;
+          updateManualActionsState();
+        }
+      });
+      manualClear.addEventListener("click", () => {
+        resetManualInput();
+        setStatus("Catatan manual dibersihkan.", "ready");
+      });
+
+      window.addEventListener("beforeunload", () => {
+        stopStream();
+        if (audioUrl) {
+          URL.revokeObjectURL(audioUrl);
+        }
+      });
+    </script>
+  </body>
+</html>
+
